@@ -5,7 +5,7 @@
             新增優惠券
         </base-button>
     </div>
-    <table class="coupon-table w-100">
+    <table class="coupon-table w-100 mt-4">
         <thead class="thead">
             <tr>
                 <th class="th">名稱</th>
@@ -16,7 +16,7 @@
                 <th class="th">編輯</th>
             </tr>
         </thead>
-        <tbody class="tbody">
+        <tbody class="tbody ">
             <tr v-for="item in couponList" :key="item.id">
                 <td class="td">{{ item.title }}</td>
                 <td class="td">{{ item.code }}</td>

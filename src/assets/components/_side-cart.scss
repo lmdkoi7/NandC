@@ -89,6 +89,7 @@
     flex: 1;
     padding-right: 0.5rem;
     margin: 0 1.5rem 1.5rem 1.5rem ;
+    overflow-x: hidden;
     &::-webkit-scrollbar{
         width: 5px;
     }
@@ -133,6 +134,15 @@
 .icon3{
     transform: rotate(15deg);
 }
+//動畫
+.item-move, .item-enter-active, .item-leave-active{
+    transition:  0.3s ease;
+}
+.item-enter-from, .item-leave-to{
+    opacity: 0;
+    transform: translateX(-30px);
+}
+
 .cart-item{
     width: 100%;
     height: 110px;

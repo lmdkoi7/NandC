@@ -16,7 +16,7 @@ import { currency } from './method/filter';
 
 const app = createApp(App);//利用App.vue創建一個vue實體
 
-router.afterEach((to,from,next)=>{
+router.afterEach((to,from,next) => {
     window.scrollTo({
         top: 0,
         behavior: 'instant'

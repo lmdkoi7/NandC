@@ -40,7 +40,7 @@
 
     <div class="dashboard-body ">
         <ul class="desktop-sidebar navbar-nav">   
-            <li class=" px-5 py-1" :class="{ 'crr-page': currentPage.crrPage === 'products' }">
+            <li class=" px-5 py-1" >
                 <RouterLink to="/dashboard/products" 
                 class="nav-link fw-bolder"
                 @click="changePage('products')"
@@ -48,7 +48,7 @@
                     商品管理
                 </RouterLink>
             </li>
-            <li class=" px-5 py-1" :class="{ 'crr-page': currentPage.crrPage === 'coupon' }">
+            <li class=" px-5 py-1" >
                 <RouterLink to="/dashboard/coupon" 
                 class="nav-link fw-bolder"
                 @click="changePage('coupon')"
@@ -56,7 +56,7 @@
                     優惠券
                 </RouterLink>
             </li>
-            <li class=" px-5 py-1" :class="{ 'crr-page': currentPage.crrPage === 'order' }">
+            <li class=" px-5 py-1">
                 <RouterLink to="" 
                 class="nav-link fw-bolder"
                 @click="changePage('order')"

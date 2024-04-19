@@ -21,8 +21,8 @@
             ></icon-button>
         </div>  
 
-        <div class="side-cart__content overflow-auto ">
-            <div class="is-cart-empty" v-show="store.cartItem==false">
+        <div class="side-cart__content ">
+            <div class="is-cart-empty" v-show="store.cartItem == false">
                 <span class="icon-group">
                     <span class="icon1"></span>
                     <span class="icon2"></span>
@@ -32,34 +32,40 @@
                 <span class="fw--bold">購物車是空的</span>
             </div>
 
-            <div class="cart-item mt-4 py-2" v-for="(item,index) in store.cartItem" :key="item.product_id">
-                <div class="cart-item_img">
-                    <img :src="item.product.images[0].imageUrl" >
-                </div>
-                <div class="cart-item_info ms-3">
-                    <div class="cart-item_info--top">
-                        <span class="item-info_name fw--bold fs--small">{{ item.product.title }}</span>
-                        <icon-button
-                        class="item-info_delete-btn"
-                        btn-icon="bi bi-trash3"
-                        btn-icon-size="16px"
-                        @click="store.deleteCartItem(item)"
-                        />
+            <transition-group
+            name="item"
+            tag="ul"
+            >
+                <div class="cart-item my-3 py-2" v-for="(item,index) in store.cartItem" :key="item.product_id">
+                    <div class="cart-item_img">
+                        <img :src="item.product.images[0].imageUrl" >
                     </div>
-                    <div class="cart-item_info--middle mb-auto">
-                        <span class="item-info_origin-price ">NT${{ item.product.price }}/個</span>
-                    </div>
-                    <div class="cart-item_info--bottom">               
-                        <span>NT${{ item.total }}</span>              
-                        <div class="item-info_item-quantity">
-                            <quantity-button
-                            v-model="item.qty"
-                            @update-cart="updateCart(item)"
+                    <div class="cart-item_info ms-3">
+                        <div class="cart-item_info--top">
+                            <span class="item-info_name fw--bold fs--small">{{ item.product.title }}</span>
+                            <icon-button
+                            class="item-info_delete-btn"
+                            btn-icon="bi bi-trash3"
+                            btn-icon-size="16px"
+                            @click="store.deleteCartItem(item)"
                             />
+                        </div>
+                        <div class="cart-item_info--middle mb-auto">
+                            <span class="item-info_origin-price ">NT${{ item.product.price }}/個</span>
+                        </div>
+                        <div class="cart-item_info--bottom">               
+                            <span>NT${{ item.total }}</span>              
+                            <div class="item-info_item-quantity">
+                                <quantity-button
+                                v-model="item.qty"
+                                @update-cart="updateCart(item)"
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>             
+            </transition-group>     
+
         </div>
             <div class="side-cart__bottom p-4">
                 <div class="subtotal mb-2">
