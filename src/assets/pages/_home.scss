@@ -1,0 +1,136 @@
+.carousel{
+    height: 100dvh;
+    max-height: 800px;
+}
+.carousel-item{
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: hidden;
+    position: relative;
+    img{
+        width: 100%;
+        object-position: 20% 40%;
+    }
+}
+.mask{
+    display: none;
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.title{
+    position: absolute;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    right: 10%;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    z-index: 2;
+}
+.title1,.title2{
+    letter-spacing: 1.5rem;
+    font-size: 2rem;
+}
+.btn{
+    font-size: 1.2rem;
+    color: white;
+    border: 1.5px solid white;
+    border-radius: 50px;
+    backdrop-filter: blur(3px);
+    align-self: center;
+    &:hover{
+        background-color: white;
+        color: $dark;
+    }
+}
+.container-xl{
+    display: flex;
+    flex-direction: column;
+}
+.product-feature{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.feature{
+    width: 100%;
+    display: flex;
+    
+    justify-content: space-evenly;
+}
+.feature1, .feature2, .feature3, .feature4{
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+    img{
+        width: 100px;
+        height: 100px;
+        object-fit: contain;
+    }
+}
+.feature-title{
+    font-size: 1.25rem;
+    padding: 1rem 0 5px 0;
+    margin-bottom: 1rem;
+    position: relative;
+    &::after{
+        content: '';
+        width: 100%;
+        border-bottom: 1.5px solid $secondary;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+}
+.bath-soap{
+    width: 50%;
+}
+@include media-breakpoint-down(xl){
+    .title{
+        right: 5%;
+    }
+    .feature{
+        flex-wrap: wrap;
+    }
+    .feature1, .feature2, .feature3, .feature4{
+        width: 50%;
+    }
+    .feature-title{
+        font-size: 1rem;
+    }
+}
+@include media-breakpoint-down(md){
+    .carousel-item{
+        img{
+            object-position: 10% 50%;
+        }
+    }
+    .title{
+        inset: 0;
+        margin: auto;
+        background-color: rgb(255, 255, 255, .3);
+        backdrop-filter: blur(6px);
+        width: 300px;
+        padding: 1rem;
+        justify-content: space-evenly;
+    }
+    .title1, .title2{
+        font-size: 1.5rem;
+        letter-spacing: 9px;
+    }
+}
+@include media-breakpoint-down(sm){
+    .feature1, .feature2, .feature3, .feature4{
+        width: 100%;
+        margin-bottom: 2.5rem;
+    }
+    .feature-title{
+        font-size: 1.25rem;
+    }
+}

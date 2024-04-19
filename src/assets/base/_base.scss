@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC&display=swap');
+body{ 
+    width: 100%;
+    min-height: 100dvh;
+    margin: 0;    
+    font-family: "Noto Serif TC","微軟正黑體",serif;
+    font-weight: 500;
+    background-color: $light;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+h1,h2,h3,h4,h5,h6{
+    margin-bottom: 0;
+    font-weight: 500;
+    color: $dark;
+    letter-spacing: 0.1rem;
+}
+span,label,p,div{
+    letter-spacing: 0.1rem;
+    color: $dark;
+}
+
+a{
+    letter-spacing: 0.1rem;
+    text-decoration: none;
+    font-weight: 400;
+}
+button{
+    letter-spacing: 0.1rem;
+    background: none;
+    border: none;
+    color: $dark;
+}
+input[type="checkbox"]{
+    accent-color: $dark;
+}
+ul,li{ 
+    list-style: none; 
+    padding: 0; 
+    margin: 0;
+    letter-spacing: 0.1rem;
+    color: $dark;
+}
+img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    display: inline-block;
+}
+table{
+    color: $dark;
+    text-align: center;
+}
+.fw--bold{
+    font-weight: 600;
+}
+.fs--small{
+    font-size: 14px;
+}

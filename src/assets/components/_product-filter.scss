@@ -1,0 +1,134 @@
+.filter-wrap{
+    display: flex;
+    flex-direction:column;
+    width: 350px;
+    min-width: 200px;
+    border-right: 1.5px solid $secondary;
+    background-color: $light;
+}
+.filter__top{
+    display: flex;
+    justify-content: space-between;
+}
+.filter__close-btn{
+    display: none;
+}
+.price-range__slider{
+    height: 2px;
+    border-radius: 10px;
+    background-color: $secondary;
+    margin: 20px 0;
+    position: relative;
+}
+.slider{
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    
+}
+.min-price,.max-price{
+    width: fit-content;
+    text-align: center;
+}
+.slider__min-thumb,.slider__max-thumb{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+    appearance: none;
+    background: none;
+    z-index: 2;
+    &::-webkit-slider-thumb{
+        pointer-events: auto;
+        cursor: pointer;
+        appearance: none;
+        background: none;
+        border: 1px solid white;
+        height: 18px;
+        width: 18px;
+        border-radius: 10px;
+        background-color: $primary;
+    }
+    &::-moz-range-thumb{
+        pointer-events: auto;
+        cursor: pointer;
+        border: none;
+        appearance: none;
+        background: none;
+        height: 20px;
+        width: 20px;
+        border-radius: 10px;
+        background-color: $primary;
+    }
+}
+.slider__progress{
+    height: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    background-color: $primary;
+}
+.filer__btn-group{
+    display: none;
+    button{
+        max-width: 150px;
+        min-width: 125px;
+    }
+}
+@include media-breakpoint-down(lg){
+    .filter-wrap{
+        position: fixed;
+        bottom: 0;
+        z-index: 200;
+        border-right: none;
+        bottom: 0;
+        width: 100%;
+        transform: translateY(100%);
+        transition: 0.4s;
+    }
+    .filer--active{
+        transform: translateY(0);
+    }
+    .filter__close-btn{
+        display: block;
+    }
+    .purpose-checkbox,.skin-type-checkbox
+    ,.benefits-checkbox{
+        display: flex;
+        flex-wrap: wrap;
+        div{
+            margin-right: 1rem;
+        }
+    }
+    .filer__btn-group{
+        display: flex;
+        justify-content: space-between;
+    }
+}
+@include media-breakpoint-down(sm){
+    .filter-wrap{
+        bottom: 0;
+        width: 100%;
+        transform: translateY(100%);
+        transition: 0.4s;
+    }
+    .filer--active{
+        transform: translateY(0);
+    }
+    .filter__close-btn{
+        display: block;
+    }
+    .purpose-checkbox,.skin-type-checkbox
+    ,.benefits-checkbox{
+        display: flex;
+        flex-wrap: wrap;
+        div{
+            margin-right: 1rem;
+        }
+    }
+    .filer__btn-group{
+        display: flex;
+        justify-content: space-between;
+    }
+}

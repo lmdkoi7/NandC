@@ -1,0 +1,13 @@
+.icon-btn{
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    i{
+        display: flex;
+        color: $dark;
+        transition: 0.25s;
+        &:hover{
+            color: $primary;
+        }
+    }
+}

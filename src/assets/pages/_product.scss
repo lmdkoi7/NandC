@@ -1,0 +1,39 @@
+.add-product{
+    display: flex;
+    justify-content: flex-end;
+    i{
+        -webkit-text-stroke: 0.2px;
+    }
+}
+.add-product-btn{
+    width: 150px;
+}
+.product-thead{
+    height: 60px;
+    border-bottom: 1.5px solid $primary;
+}
+.category,.is-enabled,.edit{
+    width: 100px;
+}
+.product-tr{
+    border-top: 1.5px solid $secondary;
+    td{
+        padding:20px 0;
+    }
+    &:first-child{
+       border: none;
+    }
+}
+.td-image{
+    img{
+        width: 80px;
+        border-radius: 5px;
+    }
+}
+.btn-group{
+    display: flex;
+    justify-content: space-around;
+}
+.del-modal{
+    width: 400px;
+}

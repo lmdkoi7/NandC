@@ -1,0 +1,191 @@
+.product-card{
+    display: flex;
+    flex-direction: column;
+}
+.product-card_image{
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    &:hover{
+        .img2{
+            opacity: 1;
+        }
+    }
+}
+.wishlist-btn{
+    background: rgb(244, 244, 244);
+    border: none;
+    border-radius: 20px;
+    color: $danger;
+    font-size: 25px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+    box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.25);
+}
+.wishlist-icon{
+    position: relative;
+    top: 1px;
+    left: 0.5px;
+}
+.product-images{
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+}
+.img2{
+    position: absolute;
+    right: 0;
+    transition: 0.3s;
+    opacity: 0;
+}
+.product-category{
+    font-size: 14px;
+}
+.product-card_title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+.mobile-wishlist-btn{
+    background: none;
+    border: none;
+    color: $danger;
+    font-size: 25px;
+    display: none;
+}
+.product-label{
+    text-align: center;
+    position: absolute;
+    top: 10px;
+    left: -2px;
+    z-index: 1;
+    height: 35px;
+    width: auto;
+    background-color: $primary;
+    border-radius: 0 15px 15px 0;
+    box-shadow: 3px 2px 7px rgba(0, 0, 0, 0.25);
+    &::after{
+        content: '';
+        height: 100%;
+        vertical-align: middle;
+        display: inline-block;
+    }
+    span{
+        color: white;
+        vertical-align: middle;
+    }
+}
+
+.mobile-product-image__indicators{
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 45px;
+    bottom: 15px;
+    z-index: 1;
+}
+.indicator{
+    width: 12px;
+    height: 12px;
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 20px;
+    opacity: 0.8;
+    transition: 0.2s;
+    display: none;
+}
+.current-img{
+    background-color: $primary;
+    width: 15px;
+    height: 15px;
+    opacity: 1;
+}
+.product-card_origin-price{
+    color: $info;
+    position: relative;
+    &::after{
+        content: '';
+        background-color: $info;
+        height: 1px;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        top: 0;
+        margin: auto 0;
+    }
+}
+.product-card_price{
+    font-size: 1.2rem; 
+}
+.discount{
+    color: $danger;
+    font-weight: 600;
+}
+.product-card_addtocart-btn{
+    display: flex;
+    span {
+        font-size: 14px;
+    }
+}
+.cart-icon{
+    font-size: 17px;
+    margin-right: 10px;
+}
+
+
+
+@include media-breakpoint-down(sm){
+    .product-images{
+        overflow-x: scroll;
+        scroll-snap-type: x mandatory;
+        &::-webkit-scrollbar{
+            display: none;
+        }
+        img{
+            scroll-snap-align: center;
+        }
+    }
+    .wishlist-btn{
+        display: none;
+    }
+    .mobile-wishlist-btn{
+        display: inline-block;
+    }
+    .img2{
+        right: initial;
+        opacity: 1;
+    }
+    .indicator{
+        display: block;
+    }
+}
+
+//相似商品的product card
+.product-cards{
+    .addtocart-btn{
+        display: none;
+    }
+    .indicator{
+        display: none;
+    }
+    .mobile-wishlist-btn{
+        display: none;
+    }
+    .wishlist-btn{
+        display: block;
+    }
+    .product-images{
+        overflow-x: hidden;
+    }
+    .product-card_price{
+        font-size: 16PX;
+    }
+}

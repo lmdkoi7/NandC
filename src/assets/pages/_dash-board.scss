@@ -1,0 +1,109 @@
+.dashboard-header{
+    box-shadow: 0px 0px 7px rgb(90, 70, 62,.5);
+    position: relative;
+    background-color: $light;
+    z-index: 10;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+.hamburger-icon{
+    z-index: 11;
+    display: none;
+}
+.navbar-brand{
+    margin-right: auto;
+}
+.logout-icon a{
+    display: inline-flex;
+    vertical-align: middle;
+    height: 40px; 
+    i{
+        width: 24px;
+        font-size: 27px;
+        position: relative;
+    } 
+    i::before{
+        position: relative;
+        bottom: 6px;
+        right: 1px;
+        margin: 0 auto;
+    }
+}
+.dashboard-body{
+    display: flex;
+    height: calc(100dvh - 61px);
+
+}
+.mobile-sidebar{
+    box-shadow: 0px 4px 7px rgb(90, 70, 62,.5); 
+    background-color: $light;
+    padding: 0 40px;
+    display: none;
+}
+.product-list,.coupon-list,.order-list{
+    margin: 10px 0;
+}
+.desktop-sidebar {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 4px 7px rgb(90, 70, 62,.5); 
+    flex-shrink: 0;
+}
+.crr-page{
+    background-color: $primary;
+    a{
+        color: $light;
+    }
+}
+
+.dashboard-body__content{
+    flex-grow: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 20px 40px 20px 20px;
+    position: relative;
+}
+@include media-breakpoint-down(lg){
+    .dashboard-header{
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    
+    .dashboard-body__content{
+        padding: 20px;
+    }
+}
+@include media-breakpoint-down(md){
+    .hamburger-icon{
+        display: block;
+    }
+    .navbar-brand{
+        margin: 0 auto;
+    }
+    .mobile-sidebar{
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 10;
+        height: 100dvh;
+        width: 50%;
+        padding-top: 61px;
+        transform: translateX(-100%);
+        opacity: 0;
+        transition: 0.4s;
+    }
+    .sidebar--active{
+        transform: translateX(0); 
+        opacity: 1;
+    }
+    .desktop-sidebar{
+        display: none;
+    }
+}
+@include media-breakpoint-down(sm){
+    .mobile-sidebar{
+        width: 100dvw;
+    }
+}
