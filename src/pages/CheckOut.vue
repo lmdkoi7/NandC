@@ -11,7 +11,9 @@
                 <div class="step3">3</div>
             </div>
         </div>
-        <RouterView></RouterView>
+            <RouterView></RouterView>
+        
+
         <div class="d-flex my-5">
             <button class="btn--left" type="button" @click="">
                 返回

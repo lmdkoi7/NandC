@@ -22,21 +22,30 @@
         </div>  
 
         <div class="side-cart__content ">
-            <div class="is-cart-empty" v-show="store.cartItem == false">
-                <span class="icon-group">
-                    <span class="icon1"></span>
-                    <span class="icon2"></span>
-                    <span class="icon3"></span>
-                </span>
-                <i class="cart-icon bi bi-cart3"></i>
-                <span class="fw--bold">購物車是空的</span>
-            </div>
+           <transition name="empty-cart">
+                <div class="is-cart-empty" v-show="store.cartItem == false">
+                    <span class="icon-group">
+                        <span class="icon1"></span>
+                        <span class="icon2"></span>
+                        <span class="icon3"></span>
+                    </span>
+                    <i class="cart-icon bi bi-cart3"></i>
+                    <span class="fw--bold">購物車是空的</span>
+                </div>
+           </transition>
 
             <transition-group
             name="item"
             tag="ul"
             >
-                <div class="cart-item my-3 py-2" v-for="(item,index) in store.cartItem" :key="item.product_id">
+                <div class="cart-item my-3 py-2" v-for="(item, index) in store.cartItem" :key="item.product_id">
+                    <loading-vue 
+                    :active="updateItemId === item.product_id"
+                    :height="30"
+                    background-color="rgb(241, 236, 228)"
+                    color="rgba(90, 70, 62, 1)"
+                    :is-full-page="false"
+                    />
                     <div class="cart-item_img">
                         <img :src="item.product.images[0].imageUrl" >
                     </div>
@@ -58,7 +67,7 @@
                             <div class="item-info_item-quantity">
                                 <quantity-button
                                 v-model="item.qty"
-                                @update-cart="updateCart(item)"
+                                @update-cart="updateCart(item, item.product_id)"
                                 />
                             </div>
                         </div>
@@ -92,26 +101,30 @@ import axios from 'axios';
 import IconButton from '@/components/IconButton.vue';
 import QuantityButton from './QuantityButton.vue';
 import BaseButton from '@/components/BaseButton.vue';
-import { onBeforeMount, computed } from 'vue';
+import { onBeforeMount, computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useSideCartStore } from '@/stores/sideCartStore.js';
+import LoadingVue from 'vue3-loading-overlay';
 
 const router = useRouter();
 const store = useSideCartStore();
+let updateItemId = ref('');
 
-const updateCart = (item) => {
+const updateCart = (item, id) => {
     const api =`${import.meta.env.VITE_APP_API}api/${import.meta.env.VITE_APP_PATH}/cart/${item.id}`;
+    updateItemId.value = id;
     const cartItem = {
-        product_id:item.product_id,
-        qty:item.qty
+        product_id: item.product_id,
+        qty: item.qty
     }
-    axios.put(api,{data:cartItem}).then((res) => {
+    axios.put(api, { data: cartItem }).then(() => {
         if(item.qty < 1){
             deleteCartItem(item);
         }
         else{
             store.getCartItem();
         }
+        updateItemId.value = '';
     })
 };
 

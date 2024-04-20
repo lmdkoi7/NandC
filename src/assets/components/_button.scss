@@ -1,16 +1,16 @@
-
 .base-btn{
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
+    height: 25px;
     border: 1.5px solid $primary;
     border-radius: 50px;
     background-color: transparent;
     overflow: hidden;
     transition: 0.2s ease-in;
-    
+    box-sizing: content-box;
 
     &::after{
         content: '';
@@ -23,7 +23,7 @@
         transform: scaleX(0);
     }
     &:hover{
-        .base-btn__text{
+        .base-btn__text, .icon{
             color: $light;
         }
         &::after{
@@ -31,8 +31,11 @@
         }
     }
 }
-.base-btn__text{
+.base-btn__text, .icon{
     z-index: 1;
     color: $primary;
     transition: 0.2s ease-in;
+}
+.disable{
+    pointer-events: none;
 }

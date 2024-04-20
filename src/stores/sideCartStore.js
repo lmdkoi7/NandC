@@ -8,6 +8,7 @@ export const useSideCartStore = defineStore('sideCart',()=>{
     const cartsTotal = ref(0);
     const cartsFinalTotal = ref(0);
     const cartsFee = ref(0);
+    let loadingItem = ref('');
 
     watch(() => cartItem.value,()=>{
         if(cartItem.value.length > 0){
@@ -49,23 +50,26 @@ export const useSideCartStore = defineStore('sideCart',()=>{
         body.classList.remove('overflow-hidden');
     };
     
-    const addToCart=(id,productQty=1)=>{
-        const api=`${import.meta.env.VITE_APP_API}api/${import.meta.env.VITE_APP_PATH}/cart`;
-        const cart=ref({
-             product_id:id,
-             qty:productQty 
+    const addToCart=(id, productQty = 1)=>{
+        const api = `${import.meta.env.VITE_APP_API}api/${import.meta.env.VITE_APP_PATH}/cart`;
+        loadingItem.value = id;
+        const cart = ref({
+             product_id: id,
+             qty: productQty 
         })
-        axios.post(api,{ data:cart.value })
+        axios.post(api, { data: cart.value })
         .then( res => {
             console.log( res.data );
+            loadingItem.value = '';
             getCartItem();
             openSideCart()
+
         })
     };
 
-    const deleteCartItem=(item)=>{
-        const api=`${import.meta.env.VITE_APP_API}api/${import.meta.env.VITE_APP_PATH}/cart/${item.id}`;
-        axios.delete(api).then((res)=>{
+    const deleteCartItem = (item) => {
+        const api = `${import.meta.env.VITE_APP_API}api/${import.meta.env.VITE_APP_PATH}/cart/${item.id}`;
+        axios.delete(api).then((res) => {
             getCartItem();
             console.log(res);
         })
@@ -77,7 +81,7 @@ export const useSideCartStore = defineStore('sideCart',()=>{
     };
 
     return{
-        cartItem, cartQty ,cartsFee, cartsTotal, cartsFinalTotal,
+        cartItem, cartQty ,cartsFee, cartsTotal, cartsFinalTotal, loadingItem,
         getCartItem,
         openSideCart,
         addToCart,

@@ -76,10 +76,14 @@
                         <span>NT$ {{ item.price * item.qty }}</span>
                     </div>
                 </div>
-                <base-button 
-                class="add-to-cart__btn py-2"
-                @click="store.addToCart( item.id , item.qty)">
-                    <i class=" bi bi-cart3"></i>
+                <base-button class="add-to-cart__btn py-2"
+                :class="{ disable: store.loadingItem === item.id }"
+                @click="store.addToCart( item.id , item.qty)"
+                >
+                    <span class="spinner-border icon" role="status"
+                    v-if="store.loadingItem === item.id"
+                    ></span>
+                    <i class=" bi bi-cart3" v-if="store.loadingItem !== item.id"></i>
                         加入購物車
                 </base-button>
             </div>

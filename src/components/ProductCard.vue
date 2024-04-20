@@ -50,9 +50,12 @@
 
         <div class="product-card_addtocart-btn mt-4">
             
-            <base-button class="addtocart-btn py-2"
-            @click="store.addToCart(props.propsItem.id,1)">
-                <i class="cart-icon bi bi-cart3"></i>
+            <base-button class="addtocart-btn py-2" :class="{ disable: store.loadingItem === props.propsItem.id }"
+            @click="store.addToCart(props.propsItem.id, 1)">
+                <span class="spinner-border icon" role="status"
+                v-if="store.loadingItem === props.propsItem.id"
+                ></span>
+                <i v-if="store.loadingItem !== props.propsItem.id" class="cart-icon bi bi-cart3"></i>
                 加入購物車
             </base-button>
         </div>       
