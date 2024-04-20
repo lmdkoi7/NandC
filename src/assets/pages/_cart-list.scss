@@ -25,6 +25,7 @@
 }
 
 .desktop-cart-item{
+    position: relative;
     display: flex;
     border-top: 1.5px solid $secondary;
     align-items: center;
@@ -71,6 +72,7 @@
 }
 
 .mobile-cart-item{
+    position: relative;
     display: none;
     border-top: 1.5px solid $secondary;
     &:first-child{

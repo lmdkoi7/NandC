@@ -15,7 +15,13 @@
                     </div>
                     <div class="desktop-table-body">
                         <div class="desktop-cart-item" v-for="item, index in store.cartItem">
-                            
+                            <loading-vue 
+                            :active="store.updateItemId === item.product_id"
+                            :height="30"
+                            background-color="rgb(241, 236, 228)"
+                            color="rgba(90, 70, 62, 1)"
+                            :is-full-page="false"
+                            />
                             <div class="product-title">
                                 <img class="product-img me-3" :src="item.product.images[0].imageUrl" alt="">
                                 <span class="fs--small fw--bold">{{ item.product.title }}</span>
@@ -24,12 +30,12 @@
                             <div class="product-qty">
                                 <quantity-button
                                 v-model="item.qty"
-                                @update-cart="updateCart(item, index)"
+                                @update-cart="store.updateCart(item, item.product_id)"
                                 />
                             </div>
                             <div class="product-total fs--small">NT${{ item.total }}</div>
                             <div class="product-delete">
-                                <button class="delete-btn" type="button" @click="store.deleteCartItem(item)">
+                                <button class="delete-btn" type="button" @click="store.deleteCartItem(item, item.product_id)">
                                     <i class="bi bi-trash3"></i>
                                 </button>
                             </div>
@@ -38,13 +44,20 @@
 
                     <div class="mobile-table-body">
                         <div class="mobile-cart-item" v-for="item in store.cartItem">
+                            <loading-vue 
+                            :active="store.updateItemId === item.product_id"
+                            :height="30"
+                            background-color="rgb(241, 236, 228)"
+                            color="rgba(90, 70, 62, 1)"
+                            :is-full-page="false"
+                            />
                             <div class="product-img">
                                 <img class="product-img me-3" :src="item.product.images[0].imageUrl" alt="">
                             </div>
                             <div class="product-info">
                                 <div class="product-info__top">
                                     <span class="fs--small fw--bold">{{ item.product.title }}</span>
-                                    <button class="delete-btn" type="button" @click="store.deleteCartItem(item)">
+                                    <button class="delete-btn" type="button" @click="store.deleteCartItem(item, item.product_id)">
                                         <i class="bi bi-trash3"></i>
                                     </button>
                                 </div>
@@ -53,7 +66,7 @@
                                     <div class="product-total fs--small">NT${{ item.total }}</div>
                                     <quantity-button
                                     v-model="item.qty"
-                                    @update-cart="updateCart(item)"
+                                    @update-cart="store.updateCart(item, item.product_id)"
                                     />
                                 </div>
                             </div>                      
@@ -99,29 +112,12 @@
 
 <script setup>
     import QuantityButton from '@/components/QuantityButton.vue';
-    import BaseButton from '@/components/BaseButton.vue';
     import { useSideCartStore } from '@/stores/sideCartStore';
-    import { RouterLink } from 'vue-router';
     import axios from 'axios';
-    import { computed, ref } from 'vue';
+    import { ref } from 'vue';
+    import LoadingVue from 'vue3-loading-overlay';
 
     const store = useSideCartStore();
-
-    const updateCart = (item) => {
-        const api = `${import.meta.env.VITE_APP_API}api/${import.meta.env.VITE_APP_PATH}/cart/${item.id}`;
-        const cartItem = {
-            product_id: item.product_id,
-            qty: item.qty
-        }
-        axios.put(api,{ data: cartItem }).then((res) => {
-            if (item.qty < 1) {
-                store.deleteCartItem(item);
-            }
-            else {
-                store.getCartItem();
-            }
-        })
-    };
 
     const coupon = ref({
         code: ''

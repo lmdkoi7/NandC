@@ -9,6 +9,7 @@ export const useSideCartStore = defineStore('sideCart',()=>{
     const cartsFinalTotal = ref(0);
     const cartsFee = ref(0);
     let loadingItem = ref('');
+    let updateItemId = ref('');
 
     watch(() => cartItem.value,()=>{
         if(cartItem.value.length > 0){
@@ -67,24 +68,49 @@ export const useSideCartStore = defineStore('sideCart',()=>{
         })
     };
 
-    const deleteCartItem = (item) => {
+    const updateCart = (item, id) => {
         const api = `${import.meta.env.VITE_APP_API}api/${import.meta.env.VITE_APP_PATH}/cart/${item.id}`;
+        updateItemId.value = id;
+        const cartItem = {
+            product_id: item.product_id,
+            qty: item.qty
+        }
+        axios.put(api,{ data: cartItem }).then((res) => {
+            if (item.qty < 1) {
+                deleteCartItem(item);
+            }
+            else {
+                getCartItem();
+            }
+            updateItemId.value = '';
+        })
+    };
+
+    const deleteCartItem = (item, id) => {
+        const api = `${import.meta.env.VITE_APP_API}api/${import.meta.env.VITE_APP_PATH}/cart/${item.id}`;
+        updateItemId.value = id;
+        console.log(updateItemId.value);
         axios.delete(api).then((res) => {
             getCartItem();
-            console.log(res);
+            updateItemId.value = '';
+            console.log(updateItemId.value);
         })
     }
 
     const deleteCarts=()=>{
         const api=`${import.meta.env.VITE_APP_API}api/${import.meta.env.VITE_APP_PATH}/carts`;
-        axios.delete(api).then(res=>console.log(res));
+        axios.delete(api).then(res => {
+            console.log(res)
+        });
     };
 
     return{
-        cartItem, cartQty ,cartsFee, cartsTotal, cartsFinalTotal, loadingItem,
+        cartItem, cartQty ,cartsFee, cartsTotal, cartsFinalTotal, 
+        loadingItem, updateItemId,
         getCartItem,
         openSideCart,
         addToCart,
+        updateCart,
         deleteCartItem,
         deleteCarts,
         closeSideCart

@@ -40,7 +40,7 @@
             >
                 <div class="cart-item my-3 py-2" v-for="(item, index) in store.cartItem" :key="item.product_id">
                     <loading-vue 
-                    :active="updateItemId === item.product_id"
+                    :active="store.updateItemId === item.product_id"
                     :height="30"
                     background-color="rgb(241, 236, 228)"
                     color="rgba(90, 70, 62, 1)"
@@ -56,7 +56,7 @@
                             class="item-info_delete-btn"
                             btn-icon="bi bi-trash3"
                             btn-icon-size="16px"
-                            @click="store.deleteCartItem(item)"
+                            @click="store.deleteCartItem(item, item.product_id)"
                             />
                         </div>
                         <div class="cart-item_info--middle mb-auto">
@@ -67,7 +67,7 @@
                             <div class="item-info_item-quantity">
                                 <quantity-button
                                 v-model="item.qty"
-                                @update-cart="updateCart(item, item.product_id)"
+                                @update-cart="store.updateCart(item, item.product_id)"
                                 />
                             </div>
                         </div>
@@ -108,25 +108,7 @@ import LoadingVue from 'vue3-loading-overlay';
 
 const router = useRouter();
 const store = useSideCartStore();
-let updateItemId = ref('');
 
-const updateCart = (item, id) => {
-    const api =`${import.meta.env.VITE_APP_API}api/${import.meta.env.VITE_APP_PATH}/cart/${item.id}`;
-    updateItemId.value = id;
-    const cartItem = {
-        product_id: item.product_id,
-        qty: item.qty
-    }
-    axios.put(api, { data: cartItem }).then(() => {
-        if(item.qty < 1){
-            deleteCartItem(item);
-        }
-        else{
-            store.getCartItem();
-        }
-        updateItemId.value = '';
-    })
-};
 
 const totalCal = computed(() => {
     return store.cartsFee + store.cartsTotal;
