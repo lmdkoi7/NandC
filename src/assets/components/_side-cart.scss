@@ -147,8 +147,11 @@
     transform: rotate(15deg);
 }
 //動畫
- .item-enter-active, .item-leave-active{
+.item-enter-active, .item-leave-active{
     transition:  0.3s ease;
+}
+.item-enter-active{
+    transition-delay: .2s;
 }
 .item-enter-from, .item-leave-to{
     opacity: 0;

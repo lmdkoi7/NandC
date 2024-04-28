@@ -2,7 +2,7 @@
     <loading :active="isLoading"></loading>
     <div class="login" >
         <div class="login-form">
-            <form @submit.prevent="signIn">
+            <form @submit.prevent="signIn" autocomplete="on">
                 <h2 class="form__tittle mb-4 text-dark text-center">會員登入</h2>
                 <div class="form__input">
                     <h5 class="text-primary">帳號</h5>
@@ -21,7 +21,7 @@
                 </div>
                         
                 <div class="form__submit d-flex flex-column align-items-center w-100">
-                    <base-button button-type="submit" class="form__submit-btn mb-2 py-2">
+                    <base-button button-type="submit" class="btn--primary form__submit-btn mb-2 py-2">
                         登入
                     </base-button>
                     <div class="form__submit-checkbox d-inline-block">
@@ -57,45 +57,43 @@
 </style>
 <script setup>
 import BaseButton from "@/components/BaseButton.vue";
-import Navbar from '@/layout/Navbar.vue';
-
 import axios from "axios";
 import { ref,reactive } from "vue";
 import { useRouter } from "vue-router";
 import Loading from 'vue3-loading-overlay';
 
-const isLoading=ref(false);
-const router=useRouter();
-const user=reactive({
+const isLoading = ref(false);
+const router = useRouter();
+const user = reactive({
     username:'',
     password:''
 })
-const inputType=ref('password');
-const hidePassword=ref(true);
-const passwordToggle=()=>{
-    hidePassword.value=!hidePassword.value;
-    if(hidePassword.value===false){
-        inputType.value='text';
+const inputType = ref('password');
+const hidePassword = ref(true);
+const passwordToggle = () => {
+    hidePassword.value =! hidePassword.value;
+    if(hidePassword.value === false) {
+        inputType.value = 'text';
     }
-    else{
-        inputType.value='password';
+    else {
+        inputType.value = 'password';
     }
 };
 
 
-const signInSuccess=()=>{
+const signInSuccess = () => {
     router.push('/dashboard');
 }
-const signIn=()=>{
-    const api=`${import.meta.env.VITE_APP_API}admin/signin`;
-    isLoading.value=true;
+const signIn = () => {
+    const api = `${import.meta.env.VITE_APP_API}admin/signin`;
+    isLoading.value = true;
     axios.post(api,user)
-    .then((res)=>{
-        isLoading.value=false;
-        if(res.data.success){
-            const token= res.data.token;
-            const expired=res.data.expired;
-            document.cookie=`hexToken=${token};expires=${new Date(expired)}`;
+    .then((res) => {
+        isLoading.value = false;
+        if (res.data.success) {
+            const token = res.data.token;
+            const expired = res.data.expired;
+            document.cookie = `hexToken=${token};expires=${new Date(expired)}`;
             signInSuccess();
         }  
     });

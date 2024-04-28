@@ -1,22 +1,28 @@
 <template>
     <div class="navbar-wrap">
-        <div class="notice"></div>
+        <div class="notice ">
+            <i class="bi bi-megaphone  me-3" ></i>
+            輸入優惠券【EGYUI112】即可享有全品項五折優惠!
+        </div>
         <nav class=" desktop-header navbar navbar-expand-md ">
             <div class="container-xl">
                 <ul class="header-menu--left navbar-nav col">
-                    <li class=" product ms-2">
+                    <li class=" product">
                         <RouterLink to="/shop" class="nav-link fw--bold">產品一覽</RouterLink>
                     </li>   
                 </ul>
                 <ul class="header-hamburger-menu navbar-nav col">
                     <li class="hamburger-icon mx-2">
                         <button type="button" class="nav-link" @click="sidebarMenuToggler">
-                            <i :class="!sidebarOpen?'bi bi-list':'bi bi-x-lg'"></i>
+                            <i class="bi bi-list"></i>
                         </button>
                     </li>
 
-                    <div class="header-sidebar-menu" :class="{'sidebar-menu--active':sidebarOpen}">      
-                        <ul class="header-menu__drawer navbar-nav flex-column h-100 w-100 py-4 px-4">   
+                    <div class="header-sidebar-menu" :class="{'sidebar-menu--active':sidebarOpen}">   
+                        <ul class="header-menu__drawer navbar-nav flex-column h-100 w-100 pt-2 pb-4 px-4">  
+                            <button class="menu__close-btn mb-3" type="button" @click="sidebarMenuToggler">
+                                <i class="close-btn__icon bi bi-x-lg"></i>
+                            </button>
                             <div class="menu__search">
                                 <i class="bi bi-search mx-1"></i>
                                 <input type="text" class="me-2">

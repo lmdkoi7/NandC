@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { ref, watch } from "vue";
 import axios from "axios";
 
-export const useSideCartStore = defineStore('sideCart',()=>{
+export const useCartStore = defineStore('cart',() => {
     const cartItem = ref({});
     const cartQty = ref(0);
     const cartsTotal = ref(0);
@@ -68,7 +68,7 @@ export const useSideCartStore = defineStore('sideCart',()=>{
         })
     };
 
-    const updateCart = (item, id) => {
+    const updateCart = async(item, id) => {
         const api = `${import.meta.env.VITE_APP_API}api/${import.meta.env.VITE_APP_PATH}/cart/${item.id}`;
         updateItemId.value = id;
         const cartItem = {
@@ -80,8 +80,8 @@ export const useSideCartStore = defineStore('sideCart',()=>{
                 deleteCartItem(item);
             }
             else {
-                getCartItem();
-            }
+                 getCartItem();
+            } 
             updateItemId.value = '';
         })
     };

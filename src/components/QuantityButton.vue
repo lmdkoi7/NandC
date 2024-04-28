@@ -6,7 +6,7 @@
         <input type="number" class="quantity-input"
         ref="input"
         :value="props.modelValue"
-        @input="$emit('update:modelValue', parseInt($event.target.value))"
+        @input="$emit('update:modelValue', parseInt($event.target.value, 10))"
         @change="$emit('updateCart')"
         >
         <button class="plus-btn" type="button" @click="increase()">
@@ -25,14 +25,15 @@
     const changeEvent = new Event('change');
     const increase = () => {
         if (input.value.value >= 1) {
-            input.value.value = parseInt(input.value.value) + 1;
+            input.value.value = parseInt(input.value.value, 10) + 1;
             input.value.dispatchEvent(inputEvent);
             input.value.dispatchEvent(changeEvent); 
         }
     };
     const decrease = () => {
         if (input.value.value > 1) {
-            input.value.value = parseInt(input.value.value) - 1;
+            input.value.value = parseInt(input.value.value, 10
+        ) - 1;
             input.value.dispatchEvent(inputEvent);
             input.value.dispatchEvent(changeEvent);
         }

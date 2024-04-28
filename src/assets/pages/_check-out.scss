@@ -10,17 +10,9 @@
     width: 200px;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     position: relative;
-    &::before{
-        content: '';
-        background-color:  rgb(168, 164, 160);
-        width: 100%;
-        height: 2px;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        margin: auto;
-    }
+
 }
 .confirm-cart{
     width: 35px;
@@ -35,7 +27,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: .5s;
+    transition: .3s;
+    transition-delay: .6s;
     &::after{
         width: 100px;
         position: absolute;
@@ -60,12 +53,32 @@
         content: '訂單確認';
     }
 }
+.progress-line{
+    flex-grow: 1;
+    background-color: rgb(168, 164, 160);
+    height: 2px;
+    position: relative;
+    &::before{
+        content: '';
+        width: 100%;
+        height: 100%;
+        background-color: $primary;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: .5s;
+    }
+}
 .active{
     .step1, .step2, .step3{
         background-color: $primary;
     }
-    &::before{
-        background-color: $primary;
+    .progress-line{
+        &::before{
+            transform: scaleX(100%);
+        }
     }
 }
 

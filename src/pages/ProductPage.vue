@@ -76,7 +76,7 @@
                         <span>NT$ {{ item.price * item.qty }}</span>
                     </div>
                 </div>
-                <base-button class="add-to-cart__btn py-2"
+                <base-button class="add-to-cart__btn btn--primary py-2"
                 :class="{ disable: store.loadingItem === item.id }"
                 @click="store.addToCart( item.id , item.qty)"
                 >
@@ -174,7 +174,7 @@ const getProductInfo = async () => {
         productData.info.qty = 1; 
     }); 
     const api = `${ import.meta.env.VITE_APP_API }api/${ import.meta.env.VITE_APP_PATH }/products/all`;
-    await axios.get(api).then( res => {
+    axios.get(api).then( res => {
         similarProducts.info = res.data.products.filter(item => item.category === productData.info.category);
         isLoading.value = false;
     });   

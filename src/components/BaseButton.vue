@@ -1,6 +1,6 @@
 <template>
-   <button class="base-btn " :type="buttonType">
-        <span class="base-btn__text">
+   <button class="" :type="buttonType">
+        <span class="btn__text">
             <slot></slot>
         </span>
     </button>
@@ -11,5 +11,5 @@
 </style>
 
 <script setup>
-const props=defineProps({buttonType:String});
+const props = defineProps({ buttonType: { type: String, default: "button" }});
 </script>

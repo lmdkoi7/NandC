@@ -50,7 +50,7 @@
 
         <div class="product-card_addtocart-btn mt-4">
             
-            <base-button class="addtocart-btn py-2" :class="{ disable: store.loadingItem === props.propsItem.id }"
+            <base-button class="addtocart-btn btn--secondary py-2" :class="{ disable: store.loadingItem === props.propsItem.id }"
             @click="store.addToCart(props.propsItem.id, 1)">
                 <span class="spinner-border icon" role="status"
                 v-if="store.loadingItem === props.propsItem.id"
@@ -68,10 +68,10 @@
     import BaseButton from '../components/BaseButton.vue';
     import { ref } from 'vue';
     import { useRouter } from 'vue-router';
-    import { useSideCartStore } from '../stores/sideCartStore';
+    import { useCartStore } from '../stores/cartStore';
 
     const router = useRouter();
-    const store = useSideCartStore();
+    const store = useCartStore();
     const props = defineProps(['propsItem', 'propsIndex']);
 
     const getProductInfo = (id) => {

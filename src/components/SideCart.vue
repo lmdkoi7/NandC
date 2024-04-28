@@ -89,7 +89,12 @@
                     <span class="fs-4">合計</span>
                     <span class="fs-4">NT${{ $filter.currency(totalCal) }}</span>
                 </div>
-                <base-button class="py-2" @click="checkOut">結帳</base-button>
+                <base-button class="btn--primary py-2" 
+                :class="{ disable: store.cartQty === 0}"
+                @click="checkOut"
+                >
+                    前往結帳
+                </base-button>
             </div>
     </div> 
     <div class="side-cart__back-drop" @click="store.closeSideCart()"></div>
@@ -97,17 +102,16 @@
 
 
 <script setup>
-import axios from 'axios';
 import IconButton from '@/components/IconButton.vue';
 import QuantityButton from './QuantityButton.vue';
 import BaseButton from '@/components/BaseButton.vue';
-import { onBeforeMount, computed, ref } from 'vue';
+import { onBeforeMount, computed } from 'vue';
 import { useRouter } from 'vue-router';
-import { useSideCartStore } from '@/stores/sideCartStore.js';
+import { useCartStore } from '@/stores/cartStore.js';
 import LoadingVue from 'vue3-loading-overlay';
 
 const router = useRouter();
-const store = useSideCartStore();
+const store = useCartStore();
 
 
 const totalCal = computed(() => {
@@ -117,6 +121,7 @@ const checkOut = () => {
     router.push('/check-out');
     store.closeSideCart();
 };
+
 onBeforeMount(store.getCartItem);
 </script>
 

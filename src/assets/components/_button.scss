@@ -1,40 +1,53 @@
-.base-btn{
+.btn--primary{
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 25px;
     border: 1.5px solid $primary;
-    border-radius: 50px;
-    background-color: transparent;
-    overflow: hidden;
+    border-radius: 3px;
+    background-color: $primary;
     transition: 0.2s ease-in;
-    box-sizing: content-box;
-
-    &::after{
-        content: '';
-        background-color: $primary;
-        width: 100%;
-        height: 100%;
-        position: absolute;
+    .btn__text, .icon{
+        color: white;
         transition: 0.2s ease-in;
-        transform-origin: left;
-        transform: scaleX(0);
     }
     &:hover{
-        .base-btn__text, .icon{
-            color: $light;
+        background-color: transparent;
+        .btn__text, .icon{
+            color: $primary;
         }
-        &::after{
-            transform: scaleX(1);
+    }
+    
+}
+
+
+.btn--secondary{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border: 1.5px solid $primary;
+    border-radius: 3px;
+    background-color: transparent;
+    transition: 0.2s ease-in;
+    .btn__text, .icon{
+        color: $primary;
+        transition: 0.2s ease-in;
+    }
+    &:hover{
+        background-color: $primary;
+        .btn__text, .icon{
+            color: white;
         }
     }
 }
-.base-btn__text, .icon{
-    z-index: 1;
-    color: $primary;
-    transition: 0.2s ease-in;
+
+.btn__text{
+    display: flex;
+    align-items: center;
+    height: 22px;
 }
 .disable{
     pointer-events: none;

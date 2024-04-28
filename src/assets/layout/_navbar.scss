@@ -11,14 +11,15 @@
 }
 .notice{
     background-color: $primary;
-    height: 25px;
+    padding: 5px 0;
     width: 100%;
-   
+    color: white;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.desktop-header{
-    
-    
-}
+
 .navbar{
     transition: 0.5s;
     overflow: visible;
@@ -49,7 +50,6 @@
 }
 .hamburger-icon{
     position: relative;
-    z-index: 100;
     button{
         border: none;
         display: flex;
@@ -125,7 +125,6 @@
     top: 0;
     left: 0;
     z-index: 2;
-    padding-top: 56px;
     padding-bottom: 0;
     opacity: 0;
     transform: translateX(-100%);
@@ -140,7 +139,13 @@
     opacity: 1;
     transform: translateX(0);
 }
-
+.menu__close-btn{
+    font-size: 26px;
+    align-self: flex-start;
+}
+.close-btn__icon{
+    -webkit-text-stroke: 0.2px;
+}
 .menu__search{
     border: 2px solid $primary;
     width: 100%;

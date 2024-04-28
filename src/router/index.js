@@ -45,9 +45,12 @@ const router = createRouter({
             },
             {
               path: 'order',
-              name: 'Order',
               props: true,
               component: () => import('@/pages/Order.vue')
+            },
+            {
+              path: 'confirm-order',
+              component: () => import('@/pages/ConfirmOrder.vue')
             }
           ]
         }
