@@ -49,11 +49,16 @@ const router = createRouter({
               component: () => import('@/pages/Order.vue')
             },
             {
-              path: 'confirm-order',
-              component: () => import('@/pages/ConfirmOrder.vue')
+              path: 'place-order/:id',
+              component: () => import('@/pages/PlaceOrder.vue')
+            },
+            {
+              path: 'order-confirmed',
+              component: () => import('@/pages/OrderConfirmed.vue')
             }
           ]
         }
+
       ]
     },
     {

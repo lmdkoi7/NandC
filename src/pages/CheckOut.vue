@@ -5,14 +5,18 @@
                 <div class="step1">1</div>      
             </div>
             <div class="information" 
-            :class="{ active: route.path === '/check-out/order' || route.path === '/check-out/confirm-order'}"
+            :class="{ active: route.path === '/check-out/order' || route.path === `/check-out/place-order/${route.params.id}`}"
             >
                 <div class="progress-line"></div>
                 <div class="step2">2</div>             
             </div>
-            <div class="confirm-order" :class="{ active: route.path === '/check-out/confirm-order'}">
+            <div class="payment" :class="{ active: route.path === `/check-out/place-order/${route.params.id}`}">
                 <div class="progress-line"></div>   
                 <div class="step3">3</div>
+            </div>
+            <div class="order-confirmed" >
+                <div class="progress-line"></div>   
+                <div class="step4">4</div>
             </div>
         </div>
         <RouterView></RouterView>

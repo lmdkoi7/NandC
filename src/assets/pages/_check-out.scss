@@ -1,12 +1,15 @@
 .container-xl{
     padding-top: 61px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
 }
 .step-progress{
     display: flex;
     justify-content: center;
 }
 
-.information, .confirm-order{
+.information, .payment, .order-confirmed{
     width: 200px;
     display: flex;
     justify-content: flex-end;
@@ -17,7 +20,7 @@
 .confirm-cart{
     width: 35px;
 }
-.step1, .step2, .step3{
+.step1, .step2, .step3, .step4{
     width: 35px;
     height: 35px;
     background-color: rgb(168, 164, 160);
@@ -32,7 +35,7 @@
     &::after{
         width: 100px;
         position: absolute;
-        bottom: -40px;
+        top: 40px;
         text-align: center;
         color: $dark;
         display: inline-block;
@@ -45,12 +48,18 @@
 }
 .step2{
     &::after{
-        content: '填寫資料';
+        content: '填寫寄送資訊';
+        width: 80px;
     }
 }
 .step3{
     &::after{
-        content: '訂單確認';
+        content: '付款';
+    }
+}
+.step4{
+    &::after{
+        content: '訂單完成';
     }
 }
 .progress-line{
@@ -104,4 +113,17 @@
     border-radius: 50px;
    
     margin-left: auto;
+}
+
+@include media-breakpoint-down(sm){
+    .step1, .step2, .step3, .step4{
+        width: 30px;
+        height: 30px;
+        &::after{
+            font-size: 14px;
+        }
+    }
+    .step2::after{
+        width: 70px;
+    }
 }

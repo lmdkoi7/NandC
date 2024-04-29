@@ -97,7 +97,7 @@
     //border: 1.5px solid $secondary;
 }
 .subtotal, .shipping-cost, .discount,
-.coupon{
+.coupon, .total{
     display: flex;
     justify-content: space-between;
 }

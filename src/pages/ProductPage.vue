@@ -149,18 +149,18 @@
 
 <script setup>
 import axios from 'axios';
-import { onBeforeMount, ref, reactive, inject } from 'vue';
+import { onBeforeMount, ref, reactive } from 'vue';
 import { useRoute, RouterLink, onBeforeRouteUpdate } from 'vue-router';
 import BaseButton from '@/components/BaseButton.vue';
 import QuantityButton from '../components/QuantityButton.vue';
 import productSlider from '@/components/productSlider.vue';
 import Footer from '@/layout/Footer.vue';
-import { useSideCartStore } from '@/stores/sideCartStore.js';
+import { useCartStore } from '@/stores/cartStore.js';
 import Loading from 'vue3-loading-overlay';
 
 const isLoading = ref(false);
 const route = useRoute();
-const store = useSideCartStore();
+const store = useCartStore();
 const productData = reactive({});
 const similarProducts = reactive({});
 const previewImg = ref(0);

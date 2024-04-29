@@ -108,7 +108,7 @@
                 繼續購物
             </base-button>
             <base-button class="check-out-btn btn--primary py-2 " @click="routerPush('check-out/order')">
-                填寫送貨資訊
+                填寫寄送資訊
             </base-button>
         </div>
         

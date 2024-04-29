@@ -12,15 +12,11 @@
         color: white;
         transition: 0.2s ease-in;
     }
-    &:hover{
+    &:active{
         background-color: transparent;
-        .btn__text, .icon{
-            color: $primary;
-        }
+        color: $primary;
     }
-    
 }
-
 
 .btn--secondary{
     position: relative;
@@ -36,11 +32,9 @@
         color: $primary;
         transition: 0.2s ease-in;
     }
-    &:hover{
+    &:active{
         background-color: $primary;
-        .btn__text, .icon{
-            color: white;
-        }
+        color: white;
     }
 }
 
@@ -51,4 +45,19 @@
 }
 .disable{
     pointer-events: none;
+}
+
+@media (hover: hover){
+    .btn--primary:hover{
+        background-color: transparent;
+        .btn__text, .icon{
+            color: $primary;
+        }
+    }
+    .btn--secondary:hover{
+        background-color: $primary;
+        .btn__text, .icon{
+            color: white;
+        }
+    }
 }
