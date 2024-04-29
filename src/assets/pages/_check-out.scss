@@ -4,93 +4,57 @@
     flex-direction: column;
     min-height: 100dvh;
 }
+.step-progress-wrap{
+    display: flex;
+    justify-content: center;
+}
 .step-progress{
+    width: 500px;
     display: flex;
-    justify-content: center;
-}
-
-.information, .payment, .order-confirmed{
-    width: 200px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+    justify-content: space-between;
     position: relative;
-
 }
-.confirm-cart{
-    width: 35px;
-}
-.step1, .step2, .step3, .step4{
-    width: 35px;
+.step{
+    position: relative;
     height: 35px;
-    background-color: rgb(168, 164, 160);
+    width: 35px;
+    background-color: rgb(189, 186, 184);
     border-radius: 35px;
-    color: white;
-    position: relative;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    color: white;
     transition: .3s;
-    transition-delay: .6s;
-    &::after{
-        width: 100px;
+    transition-delay: 1s;
+    span{
+        display: block;
         position: absolute;
-        top: 40px;
-        text-align: center;
-        color: $dark;
-        display: inline-block;
-    }
-}
-.step1{
-    &::after{
-        content: '購物車';
-    }
-}
-.step2{
-    &::after{
-        content: '填寫寄送資訊';
         width: 80px;
+        text-align: center;
+        top: 45px;
     }
 }
-.step3{
-    &::after{
-        content: '付款';
-    }
+.step.active{
+    background-color: $primary;
 }
-.step4{
-    &::after{
-        content: '訂單完成';
-    }
-}
-.progress-line{
-    flex-grow: 1;
-    background-color: rgb(168, 164, 160);
+.step-progress__line{
+    width: 100%;
     height: 2px;
-    position: relative;
-    &::before{
-        content: '';
-        width: 100%;
-        height: 100%;
+    background-color: rgb(189, 186, 184);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    z-index: -1;
+    div{
         background-color: $primary;
-        position: absolute;
-        bottom: 0;
-        left: 0;
+        height: 100%;
+        width: 100%;
+        transition: 1s;
         transform: scaleX(0);
         transform-origin: left;
-        transition: .5s;
     }
 }
-.active{
-    .step1, .step2, .step3{
-        background-color: $primary;
-    }
-    .progress-line{
-        &::before{
-            transform: scaleX(100%);
-        }
-    }
-}
-
 .btn--left{
     display: inline-block;
     padding: 10px 0;
@@ -116,7 +80,7 @@
 }
 
 @include media-breakpoint-down(sm){
-    .step1, .step2, .step3, .step4{
+    /*.step1, .step2, .step3, .step4{
         width: 30px;
         height: 30px;
         &::after{
@@ -125,5 +89,5 @@
     }
     .step2::after{
         width: 70px;
-    }
+    }*/
 }

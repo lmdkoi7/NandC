@@ -261,8 +261,8 @@
                 </div>
             </div>
             <div class="modal-footer p-3">
-                <base-button class="cancel-btn px-4 py-2 me-3" @click="hideModal">取消</base-button>
-                <base-button class="confirm-btn px-4 py-2"  @click="$emit('updateProduct',tempProduct)">確認</base-button>
+                <base-button class="cancel-btn btn--secondary px-4 py-2 me-5" @click="hideModal">取消</base-button>
+                <base-button class="confirm-btn btn--primary px-4 py-2"  @click="$emit('updateProduct',tempProduct)">確認</base-button>
             </div>
         </div>
     </div>

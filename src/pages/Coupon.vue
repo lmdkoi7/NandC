@@ -1,7 +1,7 @@
 <template>
     <div class="add-coupon">
-        <base-button class="add-coupon-btn fw-bolder py-2" @click="modalShow=true">
-            <i class="bi bi-plus-lg"></i>
+        <base-button class="add-coupon-btn btn--primary py-2" @click="modalShow=true">
+            <i class="bi bi-plus-lg me-1"></i>
             新增優惠券
         </base-button>
     </div>

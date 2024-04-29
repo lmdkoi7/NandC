@@ -1,8 +1,8 @@
 <template>
     <Loading :active="isLoading"></Loading>
     <div class="add-product ">
-        <base-button class="add-product-btn fw-bolder py-2" @click="openModal(true)">
-            <i class="bi bi-plus-lg"></i>
+        <base-button class="add-product-btn btn--primary py-2" @click="openModal(true)">
+            <i class="bi bi-plus-lg me-1"></i>
             新增產品
         </base-button>
     </div>
@@ -84,69 +84,69 @@ import BaseButton from '@/components/BaseButton.vue';
 import Pagination from '@/components/Pagination.vue';
 import Loading from 'vue3-loading-overlay';
 
-const product=ref([]);
-const pagination=ref({});  
-const productModal=ref(null);
-const tempProduct=ref({});
-const isNew=ref(false);
-const isLoading=ref(false);
+const product = ref([]);
+const pagination = ref({});  
+const productModal = ref(null);
+const tempProduct = ref({});
+const isNew = ref(false);
+const isLoading = ref(false);
 
 
-const getProducts=(page=1)=>{
+const getProducts = (page = 1) => {
     const api = `${import.meta.env.VITE_APP_API}api/${import.meta.env.VITE_APP_PATH}/admin/products/?page=${page}`;
-    isLoading.value=true;
+    isLoading.value = true;
     axios.get(api)
-    .then((res)=>{
-        isLoading.value=false;
-        if(res.data.success){
+    .then((res) => {
+        isLoading.value = false;
+        if (res.data.success) {
             console.log(res.data)
-            product.value=res.data.products;
-            pagination.value=res.data.pagination;
+            product.value = res.data.products;
+            pagination.value = res.data.pagination;
         }
     })
 }
 onBeforeMount(getProducts);
 
-const openModal=(isnew,item)=>{
-    if(isnew){
-        tempProduct.value={};
+const openModal = (isnew, item) => {
+    if (isnew) {
+        tempProduct.value = {};
     }
-    else{
-        tempProduct.value={ ...item };
+    else {
+        tempProduct.value = { ...item };
     }
-    isNew.value=isnew;
+    isNew.value = isnew;
     productModal.value.showModal();
 }
 
-const updateProduct=(item)=>{
-    tempProduct.value=item;
-    let api=`${import.meta.env.VITE_APP_API}api/${import.meta.env.VITE_APP_PATH}/admin/product`;
-    let httpMethod='post';
+const updateProduct = (item) => {
+    tempProduct.value = item;
+    let api = `${import.meta.env.VITE_APP_API}api/${import.meta.env.VITE_APP_PATH}/admin/product`;
+    let httpMethod = 'post';
     
-    if(isNew.value==false){
-        api=`${import.meta.env.VITE_APP_API}api/${import.meta.env.VITE_APP_PATH}/admin/product/${item.id}`;
-        httpMethod='put';  
+    if(isNew.value == false){
+        api = `${import.meta.env.VITE_APP_API}api/${import.meta.env.VITE_APP_PATH}/admin/product/${item.id}`;
+        httpMethod = 'put';  
     }
     axios[httpMethod](api, { data: tempProduct.value })
-    .then((res)=>{
+    .then((res) => {
         console.log(res);
         getProducts();
         productModal.value.hideModal();
     })
 }
 
-const delModalContent=ref('');
-const delModal=ref(null);
-const deleteProductId=ref({});
-const delModalShow=(item)=>{
+const delModalContent = ref('');
+const delModal = ref(null);
+const deleteProductId = ref({});
+const delModalShow = (item) => {
     delModal.value.baseModalShow();
-    delModalContent.value=`請問要刪除"${item.title}"嗎？`;
-    deleteProductId.value=item.id;
+    delModalContent.value = `請問要刪除"${item.title}"嗎？`;
+    deleteProductId.value = item.id;
 }
-const deletProduct=()=>{
-    const api=`${import.meta.env.VITE_APP_API}api/${import.meta.env.VITE_APP_PATH}/admin/product/${deleteProductId.value}`;
+const deletProduct = () => {
+    const api = `${import.meta.env.VITE_APP_API}api/${import.meta.env.VITE_APP_PATH}/admin/product/${deleteProductId.value}`;
     axios.delete(api)
-    .then((res)=>{
+    .then((res) => {
         console.log(res);
         getProducts();
     })
