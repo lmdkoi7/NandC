@@ -1,5 +1,6 @@
 <template>
-    <div class="d-flex my-5">
+    <div>
+        <div class="d-flex my-5">
         <div class="cart-wrap">
             <div class="cart__header">
                 <h4 class="cart-title ">購物車</h4>
@@ -103,14 +104,15 @@
             </div>
     </div>
 
-        <div class="button-group my-5">
-            <base-button class="go-shopping-btn btn--secondary py-2 " @click="routerPush('shop')">
-                繼續購物
-            </base-button>
-            <base-button class="check-out-btn btn--primary py-2 " @click="routerPush('check-out/order')">
-                填寫寄送資訊
-            </base-button>
-        </div>
+    <div class="button-group my-5">
+        <base-button class="go-shopping-btn btn--secondary py-2 " @click="routerPush('shop')">
+            繼續購物
+        </base-button>
+        <base-button class="check-out-btn btn--primary py-2 " @click="routerPush('order')">
+            填寫寄送資訊
+        </base-button>
+    </div>
+    </div>
         
 </template>
 

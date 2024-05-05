@@ -1,109 +1,109 @@
 <template>
-    <div class="order-confirmation mt-5" v-for="item in order">   
-        <div class="order-detail">
-            <h5 class="mb-4">訂單資訊</h5>
+    <div>
+        <div class="order-confirmation mt-5" v-for="item in order">   
+            <div class="order-detail">
+                <h5 class="mb-4">訂單資訊</h5>
 
-            <div class="order-info" >
-                <div class="order-info__number ">
-                    <h6 class="order-info-title fw--bold mb-3 me-3">訂單編號</h6>
-                    <h6>{{ item.id }}</h6>
-                </div>
-
-                <div class="order-info__date ">
-                    <h6 class="order-info-title fw--bold mb-3 me-3">訂單日期</h6>
-                    <h6>{{ dateConvert }}</h6>
-                </div>
-
-                <div class="order-info__name ">
-                    <h6 class="order-info-title fw--bold mb-3 me-3">姓名</h6>
-                    <h6>{{ item.user.name }}</h6>
-                </div>
-
-                <div class="order-info__address ">
-                    <h6 class="order-info-title fw--bold mb-3 me-3">地址</h6>
-                    <h6>{{ item.user.address }}</h6>
-                </div>
-
-                <div class="order-info__tel ">
-                    <h6 class="order-info-title fw--bold mb-3 me-3">電話</h6>
-                    <h6>{{ item.user.tel }}</h6>
-                </div>
-
-                <div class="order-info__email ">
-                    <h6 class="order-info-title fw--bold mb-3 me-3">信箱</h6>
-                    <h6>{{ item.user.email }}</h6>
-                </div>
-
-                <div class="order-info__total ">
-                    <h6 class="order-info-title fw--bold mb-3 me-3">訂單金額</h6>
-                    <h6>NT$ {{ item.total }}</h6>
-                </div>
-
-                <div class="order-info__payment-method ">
-                    <h6 class="order-info-title fw--bold mb-3 me-3">付款狀態</h6>
-                    <h6>{{ item.is_paid === false? '未付款' : '已付款' }}</h6>
-                </div>
-
-                <div class="order-info__remark ">
-                    <h6 class="order-info-title fw--bold mb-3 me-3">訂單備註</h6>
-                    <h6>{{ order.message? order.message: '(無)' }}</h6>
-                </div>
-            </div>
-        </div>
-
-        <div class="order-summary">
-            <h5 class="mb-4">商品明細</h5>
-            <div class="cart-item-group">
-                <div class="cart-item py-3" v-for="i in productList" :key="i">
-                    <img class="cart-item__image" :src="i.product.images[0].imageUrl">
-                    <div class="cart-item__info ms-3">
-                        <span class="cart-item__title fw--bold">{{ i.product.title }}</span>
-                        <span class="mt-auto">
-                            <i class="qty-icon bi bi-x-lg"></i>
-                            {{ i.qty }}
-                        </span>
+                <div class="order-info" >
+                    <div class="order-info__number ">
+                        <h6 class="order-info-title fw--bold mb-3 me-3">訂單編號</h6>
+                        <h6>{{ item.id }}</h6>
                     </div>
-                    <h6 class="mt-auto ms-auto">NT$ {{ i.total }}</h6>
+
+                    <div class="order-info__date ">
+                        <h6 class="order-info-title fw--bold mb-3 me-3">訂單日期</h6>
+                        <h6>{{ dateConvert }}</h6>
+                    </div>
+
+                    <div class="order-info__name ">
+                        <h6 class="order-info-title fw--bold mb-3 me-3">姓名</h6>
+                        <h6>{{ item.user.name }}</h6>
+                    </div>
+
+                    <div class="order-info__address ">
+                        <h6 class="order-info-title fw--bold mb-3 me-3">地址</h6>
+                        <h6>{{ item.user.address }}</h6>
+                    </div>
+
+                    <div class="order-info__tel ">
+                        <h6 class="order-info-title fw--bold mb-3 me-3">電話</h6>
+                        <h6>{{ item.user.tel }}</h6>
+                    </div>
+
+                    <div class="order-info__email ">
+                        <h6 class="order-info-title fw--bold mb-3 me-3">信箱</h6>
+                        <h6>{{ item.user.email }}</h6>
+                    </div>
+
+                    <div class="order-info__total ">
+                        <h6 class="order-info-title fw--bold mb-3 me-3">訂單金額</h6>
+                        <h6>NT$ {{ item.total }}</h6>
+                    </div>
+
+                    <div class="order-info__payment-method ">
+                        <h6 class="order-info-title fw--bold mb-3 me-3">付款狀態</h6>
+                        <h6>{{ item.is_paid === false? '未付款' : '已付款' }}</h6>
+                    </div>
+
+                    <div class="order-info__remark ">
+                        <h6 class="order-info-title fw--bold mb-3 me-3">訂單備註</h6>
+                        <h6>{{ order.message? order.message: '(無)' }}</h6>
+                    </div>
                 </div>
             </div>
 
-            <div class="subtotal py-2">
-                <span>小計</span>
-                <span>NT$ {{ subtotalCal }}</span>
-            </div>
-            <div class="shipping-cost py-2">
-                <span>運費</span>
-                <span>NT$ {{  }}</span>
-            </div>
-            <div class="discount py-2" v-if="subtotalCal !== item.total">
-                <span>折扣金額</span>
-                <span>-NT$ {{ subtotalCal - item.total }}</span>
-            </div>
-            <div class="total py-2">
-                <span>合計</span>
-                <span>NT$ {{ item.total }}</span>
-            </div>
-        </div>
+            <div class="order-summary">
+                <h5 class="mb-4">商品明細</h5>
+                <div class="cart-item-group">
+                    <div class="cart-item py-3" v-for="i in productList" :key="i">
+                        <img class="cart-item__image" :src="i.product.images[0].imageUrl">
+                        <div class="cart-item__info ms-3">
+                            <span class="cart-item__title fw--bold">{{ i.product.title }}</span>
+                            <span class="mt-auto">
+                                <i class="qty-icon bi bi-x-lg"></i>
+                                {{ i.qty }}
+                            </span>
+                        </div>
+                        <h6 class="mt-auto ms-auto">NT$ {{ i.total }}</h6>
+                    </div>
+                </div>
 
-    
-    </div>
-    <div class="button-group my-5">
-        <base-button class="place-order btn--primary py-2"
-        @click="routerPush('check-out/order-confirmed')">
-            前往付款
-        </base-button>
-    </div>              
+                <div class="subtotal py-2">
+                    <span>小計</span>
+                    <span>NT$ {{ subtotalCal }}</span>
+                </div>
+                <div class="shipping-cost py-2">
+                    <span>運費</span>
+                    <span>NT$ {{  }}</span>
+                </div>
+                <div class="discount py-2" v-if="subtotalCal !== item.total">
+                    <span>折扣金額</span>
+                    <span>-NT$ {{ subtotalCal - item.total }}</span>
+                </div>
+                <div class="total py-2">
+                    <span>合計</span>
+                    <span>NT$ {{ item.total }}</span>
+                </div>
+            </div>
+
+        
+        </div>
+        <div class="button-group my-5">
+            <base-button class="place-order btn--primary py-2"
+            @click="routerPush(`order-complete/${route.params.id}`)">
+                前往付款
+            </base-button>
+        </div>          
+    </div>    
 </template>
 
 <script setup>
     import axios from 'axios';
-    import { useOrderInfoStore } from '@/stores/orderInfoStore';
     import BaseButton from '@/components/BaseButton.vue';
     import { useRouter, useRoute } from 'vue-router';
     import { computed, ref, onBeforeMount } from 'vue';
     
 
-    const orderStore = useOrderInfoStore();
     const router = useRouter();
     const route = useRoute();
     

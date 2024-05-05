@@ -7,7 +7,7 @@ body{
     font-weight: 500;
     background-color: $light;
     overflow-x: hidden;
-    overflow-y: auto;
+    //overflow-y: auto;
 }
 h1,h2,h3,h4,h5,h6{
     margin-bottom: 0;
@@ -29,6 +29,9 @@ button{
     letter-spacing: 0.1rem;
     background: none;
     border: none;
+    color: $dark;
+}
+input, textarea{
     color: $dark;
 }
 input[type="checkbox"]{

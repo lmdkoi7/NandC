@@ -45,6 +45,12 @@
 }
 .disable{
     pointer-events: none;
+    cursor: not-allowed;
+    background-color: rgb(184, 184, 184);
+    border: 1.5px solid rgb(184, 184, 184);
+    .btn__text, .icon{
+        color: white;
+    }
 }
 
 @media (hover: hover){

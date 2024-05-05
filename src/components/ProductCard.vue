@@ -1,6 +1,6 @@
 <template>
-    <div class="product-card ">
-        <div class="product-card_image">
+    <div class="product-card" ref="productCard">
+        <div class="product-card__image">
             <button class="wishlist-btn me-2 mt-2" @click="addToWishList(props.propsItem)">
                 <i class="wishlist-icon"
                 :class="!props.propsItem.isAddToWishlist?'bi bi-suit-heart':'bi bi-suit-heart-fill'"
@@ -24,13 +24,13 @@
                 </a>  
         </div>
         <p class="product-category text-info my-2">{{ props.propsItem.category }}</p>
-        <div class="product-card_title mb-2">
+        <div class="product-card__title mb-2">
             <a class="text-dark fw--bold" 
             href="#" 
             @click.prevent="getProductInfo(props.propsItem.id)" 
             >
             {{ props.propsItem.title }}</a>
-            <button class=" mobile-wishlist-btn" @click="addToWishList(props.propsItem)">
+            <button class="mobile-wishlist-btn" @click="addToWishList(props.propsItem)">
                 <i class="wishlist-icon"
                 :class="!props.propsItem.isAddToWishlist?'bi bi-suit-heart':'bi bi-suit-heart-fill'"
                 ></i>
@@ -38,19 +38,18 @@
         </div>
                             
         <div>
-            <span class="product-card_origin-price me-2" v-if="props.propsItem.origin_price!==props.propsItem.price">
+            <span class="product-card__origin-price me-2" v-if="props.propsItem.origin_price!==props.propsItem.price">
                 NT${{ props.propsItem.origin_price }}
             </span>
-            <span class="product-card_price" 
+            <span class="product-card__price" 
             :class="{'discount':props.propsItem.origin_price!==props.propsItem.price}"
             >
                 NT${{ props.propsItem.price }}/{{ props.propsItem.unit }}
             </span>
         </div>
 
-        <div class="product-card_addtocart-btn mt-4">
-            
-            <base-button class="addtocart-btn btn--secondary py-2" :class="{ disable: store.loadingItem === props.propsItem.id }"
+        <div class="product-card__addtocart-btn mt-4">
+            <base-button class="addtocart-btn btn--secondary py-2 " :class="{ disable: store.loadingItem === props.propsItem.id }"
             @click="store.addToCart(props.propsItem.id, 1)">
                 <span class="spinner-border icon" role="status"
                 v-if="store.loadingItem === props.propsItem.id"
@@ -64,8 +63,12 @@
                     
 </template>
 
+<style lang = "scss" scoped>
+   @import '@/assets/components/product-card';
+</style>
+
 <script setup>
-    import BaseButton from '../components/BaseButton.vue';
+    import BaseButton from '@/components/BaseButton.vue';
     import { ref } from 'vue';
     import { useRouter } from 'vue-router';
     import { useCartStore } from '../stores/cartStore';
@@ -73,6 +76,7 @@
     const router = useRouter();
     const store = useCartStore();
     const props = defineProps(['propsItem', 'propsIndex']);
+
 
     const getProductInfo = (id) => {
         router.push(`/product-detail/${id}`)
@@ -94,8 +98,6 @@
         }, 200);
     };
 
+    
 </script>
 
-<style lang = "scss" scoped>
-   @import '@/assets/components/product-card';
-</style>

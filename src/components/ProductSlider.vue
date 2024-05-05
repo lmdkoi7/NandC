@@ -14,12 +14,13 @@
             </button>
         </div>
         <div class="product-cards-wrap">
-            <div class="product-cards" @scroll="scrollControl">
+            <div class="product-cards" @scroll="scrollControl" ref="slider">
                 <product-card 
                 v-for="item,index in props.productData"
                 :props-item="item"
                 :props-index="index"
                 :key="item.id"
+                ref="productCard"
                 />
             </div>
         </div>
@@ -44,7 +45,7 @@
     width: 100%;
 }
 .btn--pre,.btn--next {
-    font-size: 35px;
+    font-size: 30px;
     color: $primary;
     transition: 0.3s;
     opacity: 1;
@@ -116,45 +117,62 @@
 
 <script setup>
     import ProductCard from '@/components/ProductCard.vue';
-    import { ref, onMounted } from 'vue';
+    import { ref, watchEffect } from 'vue';
     const props = defineProps(['productData']);
-
-    const slider = document.getElementsByClassName('product-cards');
-    const productCard = document.getElementsByClassName('product-card');
     
     const isFirstPage = ref(true);
     const islastPage = ref(false);
 
+    const productCard = ref([]);
+    const slider = ref(null);
+
+    let productCardWidth = [];
+    watchEffect(() => {
+        if(slider.value && productCard.value){
+            productCard.value.forEach(i=>{
+                productCardWidth.push(i.$el);
+                
+            });
+
+            if (slider.value.scrollWidth === slider.value.clientWidth){
+                islastPage.value = true;
+            }else{
+                islastPage.value = false;
+            }
+        }
+    })
+
+    
     let sliderPage = 0;
     const sliderControl = (scrollDirection) => {
-        //const maxScrollLeft = slider[0].scrollWidth - slider[0].clientWidth;
+       
         if (sliderPage >= 0 ) {
             sliderPage += scrollDirection;
-            const scrollAmount = productCard[0].clientWidth * sliderPage + scrollDirection;
-            slider[0].scrollTo({
+            const scrollAmount = productCardWidth[0].clientWidth * sliderPage + scrollDirection;
+            
+            slider.value.scrollTo({
                 left: scrollAmount,
                 behavior: 'smooth'
             });
-            
-            //console.log(`productCard clientWidth: ${productCard[0].clientWidth}, sliderPage: ${sliderPage}, scrollAmoint: ${scrollAmount}`);
         }
     }
 
     const scrollControl = () => {
-        sliderPage = Math.round(slider[0].scrollLeft / productCard[0].clientWidth) ;
-        //console.log(sliderPage);
-
-        if (slider[0].scrollLeft === 0) {
+        sliderPage = Math.round(slider.value.scrollLeft / productCardWidth[0].clientWidth) ;
+        if (slider.value.scrollLeft === 0) {
             sliderPage = 0;
         }
         sliderPage === 0 ? isFirstPage.value = true : isFirstPage.value = false;
-        const sliderColQty = Math.round(slider[0].clientWidth / productCard[0].clientWidth);
-       
-        const maxScrollLeft = slider[0].scrollWidth - slider[0].clientWidth;
-        if (slider[0].scrollLeft === maxScrollLeft) {
-            sliderPage = productCard.length - sliderColQty;
+        const sliderColQty = Math.round(slider.value.clientWidth / productCardWidth[0].clientWidth);
+        
+        const maxScrollLeft = slider.value.scrollWidth - slider.value.clientWidth;
+        if (slider.value.scrollLeft === maxScrollLeft) {
+            sliderPage = productCardWidth.length - sliderColQty;
+            
         }
-        sliderPage === productCard.length - sliderColQty ? islastPage.value = true : islastPage.value = false;
+        sliderPage === productCardWidth.length - sliderColQty ? islastPage.value = true : islastPage.value = false;
     }
+
+    
    
 </script>

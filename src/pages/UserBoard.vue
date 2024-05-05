@@ -1,16 +1,19 @@
 <template>
-<navbar></navbar>
-<div class="userboard-container ">
-    <router-view/>
-</div>
-<Footer></Footer>
-</template>
+    <div class="userboard-container">
+        <navbar></navbar>
+        <router-view/>
+        <Footer></Footer>
+    </div>
+    </template>
 <script setup>
-import { RouterView } from 'vue-router';
-import Navbar from '../layout/Navbar.vue';
-import Footer from '../layout/Footer.vue';
+    import { RouterView } from 'vue-router';
+    import Navbar from '../layout/Navbar.vue';
+    import Footer from '../layout/Footer.vue';
 </script>
 
 <style lang="scss" scoped>
-
+    .userboard-container{
+        
+        
+    }
 </style>

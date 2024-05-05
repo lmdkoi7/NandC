@@ -13,7 +13,7 @@
                 </RouterLink>
             </li> 
             <li class="logout-icon nav-item ">
-                <a class="nav-link p-2" href="#" @click.prevent="logout">
+                <a class="nav-link p-2" href="#" @click.prevent="logOut">
                     <i class="bi bi-box-arrow-right"></i>
                 </a>
             </li> 
@@ -67,6 +67,7 @@
         </ul>
 
         <div class="dashboard-body__content ">
+            <loading-vue :active="isLoading" />
             <RouterView></RouterView>
         </div>
     </div>
@@ -78,11 +79,12 @@
 
 <script setup>
 import { ref, onBeforeMount} from 'vue';
-import { useRouter, useRoute, RouterView } from 'vue-router';
+import { useRouter, RouterView } from 'vue-router';
 import axios from 'axios';
+import LoadingVue from 'vue3-loading-overlay';
 
 const router = useRouter();
-
+const isLoading = ref(false);
 const currentPage = ref({
     navbar: ['products', 'coupon', 'order'],
     crrPage: 'products'
@@ -95,19 +97,30 @@ const sidebarOpen = ref(false);
 const sidebarMenuToggler = () => {
     sidebarOpen.value = !sidebarOpen.value;
 }
+
+const logOut = () => {
+    isLoading.value = true;
+    const api = `${import.meta.env.VITE_APP_API}logout`;
+    axios.post(api).then(res => {
+        if(res.data.success){
+            console.log(res);
+            isLoading.value = false;
+            router.push('/login');          
+        }
+    })
+}
+
 onBeforeMount(() => {
-    const signInfail = () => {
-        router.push('/login')
-    };
     const token = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
-    //console.log(token);
     axios.defaults.headers.common.Authorization = token;
     
-    const api=`${import.meta.env.VITE_APP_API}api/user/check`;
+    //驗證token是否還有效
+    const api = `${import.meta.env.VITE_APP_API}api/user/check`;
     axios.post(api).then((res) => {
         console.log(res);
         if (!res.data.success) {
-            signInfail();
+            alert('請重新登入');
+            router.push('/login');
         }
     })
 })

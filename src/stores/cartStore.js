@@ -11,17 +11,17 @@ export const useCartStore = defineStore('cart',() => {
     let loadingItem = ref('');
     let updateItemId = ref('');
 
-    watch(() => cartItem.value,()=>{
-        if(cartItem.value.length > 0){
+    watch(() => cartItem.value, () => {
+        if (cartItem.value.length > 0) {
             cartsFee.value = 60;
-        }else{
+        } else {
             cartsFee.value = 0;
         }
     })
 
 
 
-    const getCartItem=()=>{
+    const getCartItem = () => {
         const api = `${ import.meta.env.VITE_APP_API }api/${ import.meta.env.VITE_APP_PATH }/cart`;
         cartQty.value = 0;
         axios.get(api).then( res => {
@@ -33,25 +33,25 @@ export const useCartStore = defineStore('cart',() => {
         })
     };
 
-    const openSideCart=()=>{
-        const body=document.body;//js取得body元素
-        const sideCart=document.querySelector('.side-cart');
-        const backDrop=document.querySelector('.side-cart__back-drop');
+    const openSideCart = () => {
+        const body = document.body;//js取得body元素
+        const sideCart = document.querySelector('.side-cart');
+        const backDrop = document.querySelector('.side-cart__back-drop');
         sideCart.classList.add('side-cart--active');
         backDrop.classList.add('back-drop--active');
         body.classList.add('overflow-hidden');
     };
 
-    const closeSideCart=()=>{
-        const body=document.body;//js取得body元素
-        const sideCart=document.querySelector('.side-cart');
-        const backDrop=document.querySelector('.side-cart__back-drop');
+    const closeSideCart = () => {
+        const body = document.body;//js取得body元素
+        const sideCart = document.querySelector('.side-cart');
+        const backDrop = document.querySelector('.side-cart__back-drop');
         sideCart.classList.remove('side-cart--active');
         backDrop.classList.remove('back-drop--active');
         body.classList.remove('overflow-hidden');
     };
     
-    const addToCart=(id, productQty = 1)=>{
+    const addToCart = (id, productQty = 1) => {
         const api = `${import.meta.env.VITE_APP_API}api/${import.meta.env.VITE_APP_PATH}/cart`;
         loadingItem.value = id;
         const cart = ref({
@@ -59,7 +59,7 @@ export const useCartStore = defineStore('cart',() => {
              qty: productQty 
         })
         axios.post(api, { data: cart.value })
-        .then( res => {
+        .then(res => {
             console.log( res.data );
             loadingItem.value = '';
             getCartItem();
@@ -97,8 +97,8 @@ export const useCartStore = defineStore('cart',() => {
         })
     }
 
-    const deleteCarts=()=>{
-        const api=`${import.meta.env.VITE_APP_API}api/${import.meta.env.VITE_APP_PATH}/carts`;
+    const deleteCarts = () => {
+        const api = `${import.meta.env.VITE_APP_API}api/${import.meta.env.VITE_APP_PATH}/carts`;
         axios.delete(api).then(res => {
             console.log(res)
         });

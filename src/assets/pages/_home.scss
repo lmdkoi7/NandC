@@ -1,6 +1,6 @@
 .carousel{
-    height: 100dvh;
-    max-height: 800px;
+    
+    height: 500px;
 }
 .carousel-item{
     width: 100%;
@@ -38,7 +38,7 @@
     font-size: 1.2rem;
     color: white;
     border: 1.5px solid white;
-    border-radius: 50px;
+    border-radius: 5px;
     backdrop-filter: blur(3px);
     align-self: center;
     &:hover{

@@ -1,6 +1,9 @@
 <template>
-    <Loading :active="isLoading"></Loading>
-    <div class="product-page-container container-xl row " v-for="item in productData" :key="item.id">
+    <Loading :active="isLoading" 
+    :opacity="1" 
+    background-color="rgb(241, 236, 228)"
+    ></Loading>
+    <div class="container-xl row " v-for="item in productData" :key="item.id">
         <div class="bread-crumb mt-4 mb-3">
             <RouterLink to="/">首頁</RouterLink>
             <span>></span>
@@ -76,14 +79,14 @@
                         <span>NT$ {{ item.price * item.qty }}</span>
                     </div>
                 </div>
-                <base-button class="add-to-cart__btn btn--primary py-2"
+                <base-button class="add-to-cart__btn btn--primary py-2 "
                 :class="{ disable: store.loadingItem === item.id }"
                 @click="store.addToCart( item.id , item.qty)"
                 >
-                    <span class="spinner-border icon" role="status"
+                    <span class="spinner-border icon me-2" role="status"
                     v-if="store.loadingItem === item.id"
                     ></span>
-                    <i class=" bi bi-cart3" v-if="store.loadingItem !== item.id"></i>
+                    <i class=" bi bi-cart3 me-2" v-if="store.loadingItem !== item.id"></i>
                         加入購物車
                 </base-button>
             </div>
@@ -197,16 +200,17 @@ const imgSlider = () => {
     },200);
 };
 
-const isOrderNoteShow=ref(false)
-const translateX=ref('translateX(0)');
-const toggleTab=(boolean,className)=>{
-    isOrderNoteShow.value=boolean;
-    const navbarHeight=document.querySelector('.navbar')
-    const toggleTabHeight=document.querySelector('.toggle-tab')
+const isOrderNoteShow = ref(false)
+const translateX = ref('translateX(0)');
+const toggleTab = (boolean, className) => {
+    isOrderNoteShow.value = boolean;
+    const navbarHeight = document.querySelector('.navbar')
+    const toggleTabHeight = document.querySelector('.toggle-tab')
     const toggleTabEl = document.querySelector(`.${className}`);
     window.scrollTo({
-        top:toggleTabEl.offsetTop - navbarHeight.offsetHeight - toggleTabHeight.offsetHeight,
-        behavior:'smooth'
+        //減掉navbar跟tb高度以防止標題被遮住
+        top: toggleTabEl.offsetTop - navbarHeight.offsetHeight - toggleTabHeight.offsetHeight,
+        behavior: 'smooth'
     });
     
     if(boolean){
@@ -217,13 +221,14 @@ const toggleTab=(boolean,className)=>{
     }
 };
 
-onBeforeRouteUpdate(async (to, from)=>{
+onBeforeRouteUpdate(async (to, from) => {
     if (to.params.id !== from.params.id) {
+        isLoading.value = true;
         const api = `${ import.meta.env.VITE_APP_API }api/${ import.meta.env.VITE_APP_PATH }/product/${ to.params.id }`;
         axios.get(api).then( res => {
             productData.info = res.data.product;
             productData.info.qty = 1; 
-            //reload();
+            isLoading.value = false;
         });
     } 
 });

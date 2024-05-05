@@ -1,23 +1,32 @@
 <template>
-    <form class="check-out-form" autocomplete="off"  @submit.prevent="placeOrder">
+    <form class="check-out-form mt-5" autocomplete="off"  @submit.prevent="placeOrder">
         <h5 class="mb-4">送貨資訊</h5>
 
         <div class="shipping-adress mb-5">
-            <div class="name">
-                <h6 class="mb-2">收件人</h6>
-                <input class="input-field mb-4" type="text" name="name" v-model="order.user.name" required>
+            <div class="name mb-4">
+                <h6 class="d-inline-block mb-2">收件人</h6>
+                <span class="required">*</span>
+                <input class="input-field " type="text" name="name" v-model="order.user.name" required>
             </div>
-            <div class="address">
-                <h6 class="mb-2">收件地址</h6>
-                <input class="input-field mb-4" type="text" name="address" v-model="order.user.address" required>
+            <div class="address mb-4">
+                <h6 class="d-inline-block mb-2">收件地址</h6>
+                <span class="required">*</span>
+                <input class="input-field" type="text" name="address" v-model="order.user.address" required>
             </div>
-            <div class="tel">
-                <h6 class="mb-2">電話</h6>
-                <input class="input-field mb-4" type="text" name="tel" v-model="order.user.tel" required>
+            <div class="tel mb-4">
+                <h6 class="d-inline-block mb-2">電話</h6>
+                <span class="required">*</span>
+                <input class="input-field" type="tel" name="tel"  required
+                pattern="(\d{2,3}-?|\(\d{2,3}\))\d{3,4}-?\d{4}|09\d{2}(\d{6}|-\d{3}-\d{3})"
+                v-model="order.user.tel"
+                ref="telInput"
+                @input="inputEvent">
+                <span class="invalid" v-if="telInputCheck">請輸入正確的電話或手機格式</span>
             </div>
-            <div class="email">
-                <h6 class="mb-2">信箱</h6>
-                <input class="input-field mb-4" type="email" name="email" v-model="order.user.email" required>
+            <div class="email mb-4">
+                <h6 class="d-inline-block mb-2">信箱</h6>
+                <span class="required">*</span>
+                <input class="input-field" type="email" name="email" v-model="order.user.email" required>
             </div>
             <div class="remark">
                 <h6 class="mb-2">訂單備註</h6>
@@ -41,7 +50,7 @@
         </div>
         <div class="button-group my-5">
             <base-button class="return-cart-list btn--secondary py-2"
-            @click="routerPush('check-out/cart-list')">
+            @click="routerPush('carts')">
                 返回購物車
             </base-button>
 
@@ -55,33 +64,6 @@
     </form>
     
 </template>
-
-<script setup>
-    import axios from 'axios';
-    import { reactive } from 'vue';
-    import { useRouter } from 'vue-router';
-    import { useOrderInfoStore } from '@/stores/orderInfoStore';
-    import BaseButton from '@/components/BaseButton.vue';
-    const router = useRouter();
-    const store = useOrderInfoStore();
-    
-    const routerPush = (path) => {
-        router.push(`/${path}`);
-    }
-
-    const order = reactive({ user:{} });
-    const placeOrder = () => {
-        const api = `${import.meta.env.VITE_APP_API}api/${import.meta.env.VITE_APP_PATH}/order`;
-        axios.post(api, { data: order })
-        .then(res => {
-            console.log(res.data);
-            if (res.data.success){
-                routerPush(`check-out/place-order/${res.data.orderId}`);
-            }
-        })
-    }
-    
-</script>
 
 <style lang="scss" scoped>
     .check-out-form{
@@ -101,6 +83,14 @@
     }
     .address, .email{
         padding-left: 1.5rem;
+    }
+    .invalid{
+        display: block;
+        color: $danger;
+        font-size: 14px;
+    }
+    .required{
+        color: $danger;
     }
     .payment-method{
         display: flex;
@@ -153,3 +143,43 @@
         }
     }
 </style>
+
+<script setup>
+    import axios from 'axios';
+    import { reactive, ref, computed, onMounted } from 'vue';
+    import { useRouter } from 'vue-router';
+    import BaseButton from '@/components/BaseButton.vue';
+    const router = useRouter();
+    
+    const routerPush = (path) => {
+        router.push(`${path}`);
+    }
+
+    const order = reactive({ user:{} });
+    const placeOrder = () => {
+        const api = `${import.meta.env.VITE_APP_API}api/${import.meta.env.VITE_APP_PATH}/order`;
+        axios.post(api, { data: order })
+        .then(res => {
+            console.log(res.data);
+            if (res.data.success) {
+                routerPush(`/check-out/${res.data.orderId}`);
+            }
+        })
+    }
+    
+
+    const telInput = ref(null);
+    const telInputVal = ref('');
+    const inputEvent = () => {
+        telInputVal.value = telInput.value.value;
+    }
+    const telInputCheck = computed(() => {
+        //判斷是不是"不是數字"
+        if(telInputVal.value === '' || isNaN(telInputVal.value) === false){
+            return false;
+        }else{
+            return true
+        }
+    });
+</script>
+

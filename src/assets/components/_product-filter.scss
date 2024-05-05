@@ -70,11 +70,7 @@
     background-color: $primary;
 }
 .filer__btn-group{
-    display: none;
-    button{
-        max-width: 150px;
-        min-width: 125px;
-    }
+    display: flex;
 }
 @include media-breakpoint-down(lg){
     .filter-wrap{

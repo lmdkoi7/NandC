@@ -103,17 +103,20 @@
     position: absolute;
     inset: 0;
     margin: auto;
-    opacity: 0.5;
     width: 150px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    i{
+    .cart-icon{
         font-size: 50px;
         color: $dark;
     }
+    .icon-group, .cart-icon, .fw--bold{
+        opacity: 0.5;
+    }
 }
+
 //動畫
 .empty-cart-enter-active{
     transition: .6s;

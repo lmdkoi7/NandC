@@ -41,20 +41,24 @@ const router = createRouter({
           children: [
             {
               path: 'cart-list',
-              component: () => import('@/pages/CartList.vue')
+              component: () => import('@/pages/CartList.vue'),
+              alias: '/carts'
             },
             {
               path: 'order',
               props: true,
-              component: () => import('@/pages/Order.vue')
+              component: () => import('@/pages/Order.vue'),
+              alias: '/order'
             },
             {
               path: 'place-order/:id',
-              component: () => import('@/pages/PlaceOrder.vue')
+              component: () => import('@/pages/PlaceOrder.vue'),
+              alias: '/check-out/:id'
             },
             {
-              path: 'order-confirmed',
-              component: () => import('@/pages/OrderConfirmed.vue')
+              path: 'order-complete/:id',
+              component: () => import('@/pages/OrderComplete.vue'),
+              alias: '/order-complete/:id'
             }
           ]
         }

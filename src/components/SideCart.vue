@@ -1,6 +1,6 @@
 <template>
-    <button type="button" class="cart-btn nav-link" @click = " store.openSideCart() ">
-        <div class="quantity-icon" v-show = " store.cartQty > 0 ">
+    <button type="button" class="cart-btn nav-link" @click = "store.openSideCart()">
+        <div class="quantity-icon" v-show = "store.cartQty > 0">
             <span class=" fw--bold">{{ store.cartQty }}</span>
         </div> 
         <i class="cart-icon bi bi-cart3 "></i>
@@ -31,6 +31,9 @@
                     </span>
                     <i class="cart-icon bi bi-cart3"></i>
                     <span class="fw--bold">購物車是空的</span>
+                    <base-button class="btn--primary mt-3 py-1" @click="routerPush('/shop')">
+                        去商店逛逛
+                    </base-button>
                 </div>
            </transition>
 
@@ -113,12 +116,16 @@ import LoadingVue from 'vue3-loading-overlay';
 const router = useRouter();
 const store = useCartStore();
 
+const routerPush = (path) => {
+    store.closeSideCart();
+    router.push(path);
+}
 
 const totalCal = computed(() => {
     return store.cartsFee + store.cartsTotal;
 })
 const checkOut = () => {
-    router.push('/check-out');
+    router.push('/carts');
     store.closeSideCart();
 };
 

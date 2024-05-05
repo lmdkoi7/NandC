@@ -1,5 +1,5 @@
 <template>
-    <div class="filter-wrap container row" :class="{'filer--active':isFilterOpen}">
+    <div class="filter-wrap container row" :class="{'filer--active': isFilterOpen}">
         <div class="filter__top my-4">
             <h5 class="filter__title fw--bold ">篩選</h5>
             <icon-button class="filter__close-btn"
@@ -29,7 +29,6 @@
                 v-model="filterData.minPrice"
                 ref="minInput"  
                 @input="minInputEvent(minInput)"
-                @change="priceFilter()"
                 >                      
                 <input class="slider__max-thumb" 
                 type="range"
@@ -39,7 +38,6 @@
                 v-model="filterData.maxPrice"
                 ref="maxInput"
                 @input="maxInputEvent(maxInput)"
-                @change="priceFilter()"
                 >
                 <div class="slider__progress"></div>
             </div>     
@@ -177,8 +175,12 @@
             </div>
         </div>
         <div class="filer__btn-group mb-3">
-            <base-button class="py-1" @click="clearFilter">清除</base-button>
-            <base-button class="py-1">篩選</base-button>
+            <base-button class="btn--secondary py-1 me-3" @click="clearFilter">
+                清除
+            </base-button>
+            <base-button class="btn--primary py-1" @click="$emit('updateValue', filterData)">
+                篩選
+            </base-button>
         </div>
     </div>
     <back-drop 
@@ -190,17 +192,15 @@
 import BaseButton from './BaseButton.vue';
 import IconButton from './IconButton.vue';
 import BackDrop from './BackDrop.vue';
-import { reactive, ref, watch } from 'vue';
-import { useGetProductListStore } from '../stores/productListStore';
+import { reactive, ref } from 'vue';
 
-const store = useGetProductListStore();
+
 const isFilterOpen = ref(false);
 const backDrop = ref(null);
 const filterToggle = () => {
     isFilterOpen.value =! isFilterOpen.value;
     backDrop.value.backDropToggle()
 }
-defineExpose({ filterToggle });
 
 const filterData = reactive({
     minPrice: 0,
@@ -213,7 +213,7 @@ const filterData = reactive({
 const minInput = ref(null);
 const maxInput = ref(null);
 const priceGap = 20;
-const minInputEvent = (e)=>{
+const minInputEvent = (e) => {
     filterData.minPrice = parseInt(filterData.minPrice);
     filterData.maxPrice = parseInt(filterData.maxPrice);
     if (filterData.maxPrice - filterData.minPrice < priceGap){
@@ -234,7 +234,7 @@ const maxInputEvent= (e) => {
     }
 }
 
-const clearFilter=()=>{
+const clearFilter = () => {
     filterData.minPrice = 0;
     filterData.maxPrice = 300;
 
@@ -247,10 +247,8 @@ const clearFilter=()=>{
     filterData.skinType = [];
 }
 
-const priceFilter = () => {
-    store.filteredProducts = store.products.filter(item => 
-    filterData.minPrice <= item.price && item.price <= filterData.maxPrice);
-};
+defineExpose({ filterToggle, clearFilter });
+defineEmits(['updateValue']);
 
 </script>
 

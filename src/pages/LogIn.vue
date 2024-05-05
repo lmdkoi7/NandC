@@ -89,14 +89,19 @@ const signIn = () => {
     isLoading.value = true;
     axios.post(api,user)
     .then((res) => {
-        isLoading.value = false;
         if (res.data.success) {
             const token = res.data.token;
             const expired = res.data.expired;
             document.cookie = `hexToken=${token};expires=${new Date(expired)}`;
-            signInSuccess();
+            isLoading.value = false;
+            signInSuccess();       
+        }
+        else{
+            isLoading.value = false;
+            alert('登入失敗');
         }  
     });
+    
 }
 
 </script> 

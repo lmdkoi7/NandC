@@ -1,8 +1,4 @@
-.header-container{
-    padding-top: 86px;
-}
 .header{
-    
     height: 350px;
     padding: 0;
     overflow: hidden;
@@ -43,6 +39,14 @@
 .product-card-wrap--top{
     margin: 0 0 calc(1.25rem + 12px) calc(1.25rem + 12px);
 }
+//product card動畫
+.fade-enter-active, .fade-leave-active {
+    transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to{
+    opacity: 0;
+}
+
 .category{
     display: flex;
 }
@@ -93,7 +97,7 @@
     }
     .header{
         height: 300px;
-        
+        border-radius: 0;
     }
     .product-card-wrap{
         width: auto;
@@ -118,7 +122,6 @@
 @include media-breakpoint-down(md){
     .header{
         height: 200px;
-        border-radius: 0;
     }
     .title{
         font-size: 1.5rem; 
