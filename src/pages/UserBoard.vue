@@ -12,8 +12,4 @@
 </script>
 
 <style lang="scss" scoped>
-    .userboard-container{
-        
-        
-    }
 </style>
