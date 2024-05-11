@@ -73,7 +73,11 @@ const router = createRouter({
       children: [
         {
           path: 'products',
-          component: () => import('@/pages/Products.vue')
+          component: () => import('@/pages/Products.vue'),
+        },
+        {
+          path: 'add-product',
+          component: () => import('@/pages/ProductManage.vue')
         },
         {
           path: 'coupon',

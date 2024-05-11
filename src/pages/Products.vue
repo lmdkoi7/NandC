@@ -1,7 +1,7 @@
 <template>
     <Loading :active="isLoading"></Loading>
     <div class="add-product ">
-        <base-button class="add-product-btn btn--primary py-2" @click="openModal(true)">
+        <base-button class="add-product-btn btn--primary py-2" @click="openModal()">
             <i class="bi bi-plus-lg me-1"></i>
             新增產品
         </base-button>
@@ -44,8 +44,11 @@
                             class=""
                             btn-icon="bi bi-pencil-square"
                             btn-icon-size="18px"
-                            @click="openModal(false,item)"
+                            @click="openModal(false, item)"
                         /> 
+                        <!--
+                                @click="openModal(false,item)"
+                        -->
                     </div>
                 </td>
             </tr>
@@ -53,7 +56,7 @@
     </table>
     <product-modal 
         ref="productModal"
-        :propsProduct="tempProduct"
+        :propsProduct="store.tempProdut"
         @update-product="updateProduct"
     />
     <div class="del-modal">
@@ -82,14 +85,18 @@ import BaseModal from '@/components/BaseModal.vue';
 import IconButton from '@/components/IconButton.vue';
 import BaseButton from '@/components/BaseButton.vue';
 import Pagination from '@/components/Pagination.vue';
+import { useRouter } from 'vue-router';
+import { useDashboardStore } from '@/stores/dashboardStore';
 import Loading from 'vue3-loading-overlay';
 
 const product = ref([]);
 const pagination = ref({});  
 const productModal = ref(null);
-const tempProduct = ref({});
 const isNew = ref(false);
 const isLoading = ref(false);
+const store = useDashboardStore();
+const router = useRouter();
+
 
 
 const getProducts = (page = 1) => {
@@ -107,19 +114,26 @@ const getProducts = (page = 1) => {
 }
 onBeforeMount(getProducts);
 
-const openModal = (isnew, item) => {
-    if (isnew) {
-        tempProduct.value = {};
+const openModal = (isnew = true, item) => {
+    if(isnew) {
+        store.tempProdut = {};
+    }else{
+        store.tempProdut = {...item};
+    }
+    router.push('add-product');
+    console.log(store.tempProdut);
+    /*if (isnew) {
+        store.tempProdut = {};
     }
     else {
-        tempProduct.value = { ...item };
+        store.tempProdut = { ...item };
     }
     isNew.value = isnew;
-    productModal.value.showModal();
+    productModal.value.showModal();*/
 }
 
 const updateProduct = (item) => {
-    tempProduct.value = item;
+    store.tempProdut = item;
     let api = `${import.meta.env.VITE_APP_API}api/${import.meta.env.VITE_APP_PATH}/admin/product`;
     let httpMethod = 'post';
     
@@ -127,7 +141,7 @@ const updateProduct = (item) => {
         api = `${import.meta.env.VITE_APP_API}api/${import.meta.env.VITE_APP_PATH}/admin/product/${item.id}`;
         httpMethod = 'put';  
     }
-    axios[httpMethod](api, { data: tempProduct.value })
+    axios[httpMethod](api, { data: store.tempProdut })
     .then((res) => {
         console.log(res);
         getProducts();
@@ -152,7 +166,6 @@ const deletProduct = () => {
     })
     delModal.value.baseModalClose();
 }
-
 
 </script>
 

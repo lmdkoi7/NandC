@@ -35,16 +35,16 @@
         <div class="login-img">
             
             <div class="login-img--left">
-                <img src="../assets/img/login-img.jpg" alt="">
+                <img src="@/assets/img/login-img.jpg" alt="">
             </div>
             <div class="login-img_text"> 
                 <span id="and">&</span>
             </div>
             <div class="login-img--right">
-                <img src="../assets/img/login-img2.jpg" alt="">
+                <img src="@/assets/img/login-img2.jpg" alt="">
             </div>
             <div class="login-img--mobile">
-                <img src="../assets/img/mobile-login-img.jpg" alt="">
+                <img src="@/assets/img/mobile-login-img.jpg" alt="">
             </div>
         </div>
     </div>   
@@ -99,7 +99,7 @@ const signIn = () => {
         else{
             isLoading.value = false;
             alert('登入失敗');
-        }  
+        }
     });
     
 }
