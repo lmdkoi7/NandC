@@ -7,7 +7,7 @@ const router = createRouter({
       path: '/',
       name: 'userBoard',
       redirect: '/home', //將預設的'/'路徑重定向到'/home'頁面，
-      component: () => import('@/pages/userBoard.vue'),
+      component: () => import('@/pages/UserBoard.vue'),
       children: [
         {
           path: 'home',
