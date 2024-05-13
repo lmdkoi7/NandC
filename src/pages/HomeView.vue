@@ -68,7 +68,7 @@ import { ref, onBeforeMount } from 'vue';
 
 const newProducts = ref([]);
 const getProductInfo = async () => {
-    const api = `https://vue3-course-api.hexschool.io/api/nandc-api/products/all`;
+    const api = `${ import.meta.env.VITE_APP_API }api/${ import.meta.env.VITE_APP_PATH }/products/all`;
     axios.get(api).then( res => {
         newProducts.value = res.data.products.filter(item => item.label);
     });   
