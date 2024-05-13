@@ -73,5 +73,6 @@ const getProductInfo = async () => {
         newProducts.value = res.data.products.filter(item => item.label);
     });   
 };
+console.log(import.meta.env.VITE_TEXT);
 onBeforeMount(getProductInfo);
 </script>
