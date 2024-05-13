@@ -35,6 +35,8 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'
+      - name: Read env
+        run: echo "VITE_APP_API is ${{ secrets.VITE_APP_API }}"
       - name: Install dependencies
         run: npm ci
       - name: Build
