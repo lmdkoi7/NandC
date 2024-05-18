@@ -1,18 +1,22 @@
+.productManage__content{
+    width: 100%;
+    overflow-y: scroll;
+    flex-grow: 1;
+    padding: 2rem;
+}
 .product-info{
-    flex: 1;
-    margin-right: 1rem;
+    padding-right: 1rem;
     display: flex;
     flex-wrap: wrap;
+}
+.product-image{
+    padding-left: 1rem;
 }
 .category{
     padding: 5px;
 }
 .input-file{
     display: none;
-}
-.product-image{
-    flex: 1;
-    margin-left: 1rem;
 }
 .upload-img{
     display: flex;
@@ -37,6 +41,7 @@
 
 .images-group{
     display: flex;
+    flex-wrap: wrap;
 }
 .image{
     position: relative;
@@ -44,7 +49,7 @@
     border-radius: 5px;
     height: 100px;
     width: 100px;
-    margin: 0 10px;
+    margin-right: 20px;
     &:hover{
        .overlay{
             background-color: rgb(255, 255, 255, 0.3);
@@ -55,6 +60,17 @@
             opacity: 1;
        }
     }
+}
+.uploading{
+    position: relative;
+    height: 100px;
+    width: 100px;
+    margin: 0 10px;
+    border-radius: 5px;
+}
+.loading-overlay{
+    position: absolute;
+    inset: 0;
 }
 
 .overlay{
@@ -74,4 +90,33 @@
 }
 .overlay, .delete-btn{
     transition: .2s;
+}
+
+.product-qty{
+    flex: 1;
+}
+.product-ingredient{
+    padding-left: 1rem;
+}
+.product-description{
+    padding-right: 1rem;
+}
+.product-info, .product-image, .product-description, 
+.product-ingredient{
+    width: 50%;
+}
+
+
+.productManage__bottom{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: $light;
+    height: 80px;
+    box-shadow: 0px 0px 7px rgba(90, 70, 62, 0.5);
+}
+.cancel-btn, .save-btn{
+    width: 100px;
+    height: 40px;
+    margin-right: 2rem;
 }

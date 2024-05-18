@@ -223,13 +223,13 @@ const minInputEvent = (e) => {
         progress.style.left = `${parseInt(e.value) / 3}%`;
     }
 };
-const maxInputEvent= (e) => {
-    filterData.minPrice=parseInt(filterData.minPrice);
-    filterData.maxPrice=parseInt(filterData.maxPrice);
+const maxInputEvent = (e) => {
+    filterData.minPrice = parseInt(filterData.minPrice);
+    filterData.maxPrice = parseInt(filterData.maxPrice);
     if (filterData.maxPrice - filterData.minPrice < priceGap){
         filterData.maxPrice = filterData.minPrice + priceGap;
     } else {
-        const progress=document.querySelector('.slider__progress');
+        const progress = document.querySelector('.slider__progress');
         progress.style.right = `${(300 - parseInt(e.value)) / 3}%`;
     }
 }
@@ -239,8 +239,8 @@ const clearFilter = () => {
     filterData.maxPrice = 300;
 
     const progress = document.querySelector('.slider__progress');
-    progress.style.left=`${parseInt(filterData.minPrice) / 3}%`;
-    progress.style.right=`${(300 - parseInt(filterData.maxPrice = 300)) / 3}%`;
+    progress.style.left = `${parseInt(filterData.minPrice) / 3}%`;
+    progress.style.right = `${(300 - parseInt(filterData.maxPrice = 300)) / 3}%`;
 
     filterData.benefits = [];
     filterData.purpose = [];

@@ -146,7 +146,7 @@
 
 <script setup>
     import axios from 'axios';
-    import { reactive, ref, computed, onMounted } from 'vue';
+    import { reactive, ref, computed } from 'vue';
     import { useRouter } from 'vue-router';
     import BaseButton from '@/components/BaseButton.vue';
     const router = useRouter();

@@ -2,9 +2,9 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 
 export const useDashboardStore = defineStore('dashboard', () => {
-    const tempProdut = ref({});
+    const tempProduct = ref({});
 
     return{
-        tempProdut
+        tempProduct
     };
 });
