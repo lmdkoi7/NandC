@@ -2,7 +2,7 @@
     <div class="p-5">
         <Loading :active="isLoading"></Loading>
         <div class="add-product ">
-            <base-button class="add-product-btn btn--primary py-2" @click="openModal()">
+            <base-button class="add-product-btn btn--primary py-2" @click="editProduct(true)">
                 <i class="bi bi-plus-lg me-1"></i>
                 新增產品
             </base-button>
@@ -45,7 +45,7 @@
                                 class=""
                                 btn-icon="bi bi-pencil-square"
                                 btn-icon-size="18px"
-                                @click="editProduct(item)"
+                                @click="editProduct(false, item)"
                             /> 
                             <!--
                                     @click="openModal(false,item)"
@@ -114,11 +114,17 @@ const getProducts = (page = 1) => {
 }
 onBeforeMount(getProducts);
 
-const editProduct = (item) => {
-    router.push({
-        path: `add-product/${item.id}`,
-    })
-    store.tempProduct = {...item};
+const editProduct = (isNew, item) => {
+    if (isNew) {
+        store.tempProduct = {};
+        router.push('add-product');
+    } else {
+        router.push({
+            path: `add-product/${item.id}`,
+        });
+        //store.tempProduct = {...item};
+    }
+
 }
 /*const openModal = (isnew = true, item) => {
     if(isnew) {

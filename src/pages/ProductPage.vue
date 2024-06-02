@@ -43,7 +43,7 @@
                 <span>{{ item.label }}</span>
             </div>
             <div class="product-info__title mb-3">
-                <h4 class="fw-bolder">{{ item.title }}</h4>
+                <h4 class="fw--semi-bold">{{ item.title }}</h4>
                 <button class="wishlist-btn " @click="">
                     <i class="wishlist-icon bi bi-suit-heart"></i>
                 </button>

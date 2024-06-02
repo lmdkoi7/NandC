@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap');
 body{ 
     width: 100%;
     min-height: 100dvh;
     margin: 0;    
-    font-family: "Noto Serif TC","微軟正黑體",serif;
+    font-family: "Noto Serif TC", "微軟正黑體", serif;
     font-weight: 500;
     background-color: $light;
     overflow-x: hidden;
@@ -54,9 +54,11 @@ table{
     color: $dark;
     text-align: center;
 }
-.fw--bold{
+
+.fw--semi-bold{
     font-weight: 600;
 }
+
 .fs--small{
     font-size: 14px;
 }

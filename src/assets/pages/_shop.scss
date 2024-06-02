@@ -155,9 +155,10 @@
     }
     .product-card-wrap--bottom{
         padding: 0;
+        gap: 0 12px;
     }
     .product-card{
-        padding: 0 ;
-        width: 100%;
+       padding: 0;
+       width: calc(50% - 6px);
     }
 }

@@ -61,6 +61,8 @@
         color: white;
     }
 }
+
+
 @media(hover :hover){
     .minus-btn, .plus-btn{
         &:hover{

@@ -40,17 +40,22 @@
 
     <div class="dashboard-body ">
         <ul class="desktop-sidebar navbar-nav">   
-            <li class=" px-5 py-1" >
+            <li class=" px-5 py-1"
+            :class="{'crr-page': route.path === '/dashboard/products'}"
+            >
                 <RouterLink to="/dashboard/products" 
                 class="nav-link fw-bolder"
+                
                 @click="changePage('products')"
                 >
                     商品管理
                 </RouterLink>
             </li>
-            <li class=" px-5 py-1" >
+            <li class=" px-5 py-1" 
+            :class="{'crr-page': route.path === '/dashboard/coupon'}"
+            >
                 <RouterLink to="/dashboard/coupon" 
-                class="nav-link fw-bolder"
+                class="nav-link fw-bolder"              
                 @click="changePage('coupon')"
                 >
                     優惠券
@@ -79,11 +84,12 @@
 
 <script setup>
 import { ref, onBeforeMount} from 'vue';
-import { useRouter, RouterView } from 'vue-router';
+import { useRouter, useRoute, RouterView } from 'vue-router';
 import axios from 'axios';
 import LoadingVue from 'vue3-loading-overlay';
 
 const router = useRouter();
+const route = useRoute();
 const isLoading = ref(false);
 const currentPage = ref({
     navbar: ['products', 'coupon', 'order'],

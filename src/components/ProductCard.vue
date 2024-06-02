@@ -38,7 +38,7 @@
         </div>
                             
         <div>
-            <span class="product-card__origin-price me-2" v-if="props.propsItem.origin_price!==props.propsItem.price">
+            <span class="product-card__origin-price me-1" v-if="props.propsItem.origin_price!==props.propsItem.price">
                 NT${{ props.propsItem.origin_price }}
             </span>
             <span class="product-card__price" 

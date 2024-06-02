@@ -76,9 +76,12 @@ const router = createRouter({
           component: () => import('@/pages/Products.vue'),
         },
         {
+          path: 'add-product',
+          component: () => import('@/pages/ProductManage.vue'),
+        },
+        {
           path: 'add-product/:id',
           component: () => import('@/pages/ProductManage.vue'),
-          
         },
         {
           path: 'coupon',

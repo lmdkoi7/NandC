@@ -11,15 +11,14 @@
 .filter-label{
     font-size: 14px;
     display: inline-block;
-    background-color: $primary;
-    color: white;
+    background-color: $secondary;
+    
     border-radius: 30px;
     padding: 5px 0px 5px 10px;
 }
 .icon{
     background: none;
     border: none;
-    color: white;
     
 }
 </style>

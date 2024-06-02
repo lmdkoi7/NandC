@@ -13,7 +13,7 @@
     padding-left: 1rem;
 }
 .category{
-    padding: 5px;
+    height: 30px;
 }
 .input-file{
     display: none;
@@ -95,24 +95,89 @@
 .product-qty{
     flex: 1;
 }
-.product-ingredient{
+.product-ingredient, .product-usage, .notes, 
+.product-preservation{
     padding-left: 1rem;
 }
-.product-description{
+.product-description, .product-use, .order-notification{
     padding-right: 1rem;
 }
 .product-info, .product-image, .product-description, 
-.product-ingredient{
+.product-ingredient, .product-use, .product-usage,
+.order-notification, .notes, .product-preservation{
     width: 50%;
 }
+.toggle{
+    width: 80px;
+    height: 34px;
+    position: relative;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    transition: 0.3s cubic-bezier(0,.08,.2,1);     
+}
+.toggle.enable{
+    background-color: $primary;
+    .toggle--enable{
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.3s;
+    }
+    .toggle-btn{
+        transform: translateX(47px);
+    }
+}
+.toggle.disable{
+    background-color: rgb(188, 188, 188);
+    .toggle--disable{
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.3s;
+    }
+    .toggle-btn{
+        transform: translateX(0px);
+    }
+}
+.toggle-btn{
+    height: 25px;
+    width: 25px;
+    border-radius: 25px;
+    background-color: $light;
+    transition: 0.3s cubic-bezier(0,.08,.2,1); 
+    z-index: 1;
+}
 
+
+.toggle--enable{
+    position: absolute;
+    left: 10px;
+    color: $light;
+    opacity: 0;
+    transform: translateY(5px);
+    transition: 0.3s;
+}
+.toggle--disable{
+    position: absolute;
+    right: 10px;
+    opacity: 0;
+    transform: translateY(5px);
+    transition: 0.3s;
+}
+.filter-label--skin-type{
+    display: flex;
+    flex-wrap: wrap;
+}
+.filter-label__input{
+    flex: 1;
+    margin-right: 1rem;
+}
 
 .productManage__bottom{
     display: flex;
     justify-content: flex-end;
     align-items: center;
     background-color: $light;
-    height: 80px;
+    height: 125px;
     box-shadow: 0px 0px 7px rgba(90, 70, 62, 0.5);
 }
 .cancel-btn, .save-btn{
